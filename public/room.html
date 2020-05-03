@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="wie-bi04">
+  <meta name="description" content="wie-bi04-project">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="js/socket.io.js"></script>
+  <script src="js/RTCMultiConnection.min.js"></script>
+  <script src="js/rtc-adapter.js"></script>
+  <title>Room</title>
+</head>
+<body>
+  <div class="container-fluid">
+    <h1 class="display-4">Your Room</h1>
+  <button id="btn-open-room">Open Room</button>
+  <button id="btn-join-room">Join Room</button>
+  <hr>
+  <script>
+    var connection = new RTCMultiConnection();
+
+    // this line is VERY_important
+    connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+
+    // all below lines are optional; however recommended.
+
+    connection.session = {
+      audio: true,
+      video: true
+    };
+
+    connection.sdpConstraints.mandatory = {
+      OfferToReceiveAudio: true,
+      OfferToReceiveVideo: true
+    };
+
+    connection.onstream = function (event) {
+      console.log(event);
+      let media = event.mediaElement;
+      // media.controls = false;
+      document.body.appendChild(media);
+
+    };
+    var predefinedRoomId = 'YOUR_Name';
+
+    document.getElementById('btn-open-room').onclick = function () {
+      this.disabled = true;
+      connection.open(predefinedRoomId);
+    };
+
+    document.getElementById('btn-join-room').onclick = function () {
+      this.disabled = true;
+      connection.join(predefinedRoomId);
+    };
+    connection.onNewParticipant = function (participantId, userPreferences) {
+      // if OfferToReceiveAudio/OfferToReceiveVideo should be enabled for specific users
+      userPreferences.localPeerSdpConstraints.OfferToReceiveAudio = true;
+      userPreferences.localPeerSdpConstraints.OfferToReceiveVideo = true;
+
+      userPreferences.dontAttachStream = false; // according to situation
+      userPreferences.dontGetRemoteStream = false;  // according to situation
+
+      // below line must be included. Above all lines are optional.
+      // if below line is NOT included; "join-request" will be considered rejected.
+      connection.acceptParticipationRequest(participantId, userPreferences);
+    };
+  </script>
+  </div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
