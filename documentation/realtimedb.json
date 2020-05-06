@@ -1,0 +1,21 @@
+{
+    "id_prof":{
+        "endtime":time,
+        "students":[
+            {
+                "id_stud":state(away..),
+                "name":name studens
+            },
+            {"..."}
+        ],
+        "rooms":[
+            {
+                "id_room":[id_students..]
+            },
+            {
+                "id_room":[id_students..]
+            },
+        ]
+    }
+    
+}

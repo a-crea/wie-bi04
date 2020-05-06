@@ -49,7 +49,10 @@
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
           // User is signed in.
-          console.log(firebase.auth().currentUser);
+          let url = window.location.origin;
+          window.location.replace(url+"/prof_test.html");
+          console.log(url);
+          console.log(firebase.auth().currentUser.displayName);
         } else {
           console.log("user not logged in");
           // No user is signed in.
