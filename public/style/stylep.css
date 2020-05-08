@@ -1,0 +1,67 @@
+body{
+  background:#f4f4f4;
+}
+
+/* Navbar */
+.navbar{
+  min-height: 33px !important;
+  margin-bottom:0;
+  border-radius:0;
+}
+
+.navbar-nav .navbar-brand{
+  font-size: medium;
+  padding-top:6px !important;
+  padding-bottom:0 !important;
+  height: 33px;
+  color:black;
+}
+
+
+.navbar-default {
+  background-color: lightskyblue;
+  border-color: lightcyan;
+}
+.navbar-default .navbar-brand {
+  color: white;
+  font-size: xx-large;
+}
+
+
+.navbar-default .navbar-text {
+  color: #ecf0f1;
+}
+
+
+#btn-manually{
+  top: 180px;
+  right: 500px;
+  position: absolute;
+  padding: 12.5px;
+  border-radius: 10px;
+  margin: 20px;
+  text-align: center;
+
+}
+
+#btn-randomly{
+  top: 250px;
+  right: 500px;
+  position: absolute;
+  padding: 12px;
+  border-radius: 10px;
+  margin: 20px;
+  text-align: center;
+
+} 
+
+#createroom{
+  top: 100px;
+  right: 490px;
+  position: absolute; 
+  text-align: center;
+  position: absolute;
+}
+
+
+
