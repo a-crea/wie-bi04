@@ -65,29 +65,29 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
   <script type="text/javascript">
-    var db = firebase.firestore();
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-          var docRef = db.collection("teaching").doc(user.email);
-          docRef.get().then(function (doc) {
-            if (doc.exists) {
-              console.log("Document data:", doc.data());
-            } else {
-              let url = window.location.origin;
-              window.location.replace(url + "/index.html");
-            }
-          }).catch(function (error) {
-            console.log("Error getting document:", error);
-          });
-        } else {
-          console.log("user not logged in");
-          let url = window.location.origin;
-          window.location.replace(url + "/index.html");
-        }
-      });
-    $(function () {
-        $("#students-list").html("");
-      });
+    // var db = firebase.firestore();
+    // firebase.auth().onAuthStateChanged(function (user) {
+    //     if (user) {
+    //       var docRef = db.collection("teaching").doc(user.email);
+    //       docRef.get().then(function (doc) {
+    //         if (doc.exists) {
+    //           console.log("Document data:", doc.data());
+    //         } else {
+    //           let url = window.location.origin;
+    //           window.location.replace(url + "/index.html");
+    //         }
+    //       }).catch(function (error) {
+    //         console.log("Error getting document:", error);
+    //       });
+    //     } else {
+    //       console.log("user not logged in");
+    //       let url = window.location.origin;
+    //       window.location.replace(url + "/index.html");
+    //     }
+    //   });
+    // $(function () {
+    //     $("#students-list").html("");
+    //   });
   </script>
 
 </body>
