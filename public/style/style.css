@@ -7,10 +7,13 @@
   align-items: center;
 }
 
-.container {
-  width: 500px;
+.container{
+  padding: 0px;
+  background-color: #0b0c22;
+  width: 100%;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
   height: 430px;
-  background-color: rgba(44, 62, 80, 0.7);
   display: inline-block;
   justify-content: center;
   align-items: center;
@@ -83,9 +86,20 @@ Stylesheet of Professor Dashboard
 */
 
 #body{
-  background:#f4f4f4;
-  padding-top: 100px;
-  padding-left: 30px;
+  background: #0b0c22;
+  padding-top: 110px;
+  padding-left: 40px;
+}
+::-webkit-scrollbar{
+  width: 20px;
+}
+::-webkit-scrollbar-thumb{
+  background : linear-gradient(
+    45deg,
+    #06dee1,
+    #79ff6c
+  );
+  border-radius: 10px;
 }
 
 /* Navbar */
@@ -116,12 +130,9 @@ Stylesheet of Professor Dashboard
   color: #ecf0f1;
 }
 
-#col-sm-2{
-  float: left;
-}
-
-#col-sm-10{
-  float: right;
+.textDefault {
+  color: white;
+  text-align: center;
 }
 
 p.list-group {
@@ -133,7 +144,13 @@ p.list-group {
   width: 80%;
   text-align: center;
 }
+#btn-manually{
+  background-color: #06dee1;
+}
 
+#btn-randomly{
+  background-color: #79ff6c;
+}
 #btn-manually, #btn-randomly{
   padding: 20px;
   border-radius: 10px;
