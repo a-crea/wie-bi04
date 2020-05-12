@@ -156,3 +156,26 @@ p.list-group {
   border-radius: 10px;
   margin: 15px;
 }
+
+#set-timer-btn{
+  background-color: #79ff6c;
+  color: black;
+  position: absolute;
+  text-align: center;
+  top: 100px;
+  right: 150px;
+}
+
+
+.modal-title{
+  text-align: center;
+  padding-left: 180px;
+}
+
+@media only screen and (max-width: 600px) {
+  .modal-title{
+    text-align: center;
+    padding-left: 110px;
+  }
+}
+
