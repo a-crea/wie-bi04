@@ -23,12 +23,12 @@
           <li><a href="index.html">Logout</a></li>
           </ul>
   </nav>
-  <body>
+
     <div class="row">
       <div class="col-sm-3">
         <h2 class="textDefault">STUDENTS</h2>
         <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-          <div class="container">
+          <div id="list">
             <ul class="list-group" id="students-list">
             <li class="list-group-item">Vera Belingheri</li>
             <li class="list-group-item">Dapibus ac facilisis in</li>
@@ -50,10 +50,14 @@
       </div>
 
       <div class="col-sm-9">
-       <div class="center">
+       <div class="main-section">
         <h1 class="textDefault">CREATE ROOMS</h1>
-        <div><button type="button" id="btn-manually" class="btn btn-lg">Match users manually</button></div> 
-        <div><button type="button" id="btn-randomly" class="btn btn-lg">Match users randomly</button></div>
+        <br>
+        <div><button type="button" id="btn-manually" class="btn btn-lg">
+          <h3 class="text-default">MATCH USERS MANUALLY</h3></button></div> 
+        <br>
+        <div><button type="button" id="btn-randomly" class="btn btn-lg">
+          <h3 class="text-default">MATCH USERS RANDOMLY</h3></button></div>
       </div>
     </div>
   </div>
