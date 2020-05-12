@@ -58,6 +58,29 @@
     </div>
   </div>
 
+  <!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" id="set-timer-btn" data-toggle="modal" data-target="#myModal">Set timer</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Set timer</h4>
+      </div>
+      <div class="modal-body">
+        <input type="text" id="time"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id = "start-btn" class="btn btn-success" data-dismiss="modal">Start</button>
+      </div>
+    </div>
+  </div>
+  </div>
+ 
+
   <script src="/__/firebase/7.14.2/firebase-app.js"></script>
   <script src="/__/firebase/7.14.2/firebase-auth.js"></script>
   <script src="/__/firebase/7.14.2/firebase-firestore.js"></script>
