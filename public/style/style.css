@@ -191,11 +191,12 @@ p.list-group {
 }
 
 #inlineFormCustomSelect{
-position: relative;
-text-align: center;
-width: 2cm;
-padding-right: 1cm;
-height: 2cm;
+  position: relative;
+  text-align: center;
+  font-size: 2em;
+  width: 2cm;
+  padding-right: 1cm;
+  height: 2cm;
 }
 
 #start-btn{
