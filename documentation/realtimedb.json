@@ -6,4 +6,11 @@
         "room": id-room
     },
     "...",
+    "id-room":{
+        "moreTime": false,
+        "needsHelp": false,
+        "messages":[{
+            "m1":..
+        }] /*Implentare per far sapere al prof i messaggi precedenti (NON NECESSARIO PER IL PROGETTO)*/
+    }
 }
