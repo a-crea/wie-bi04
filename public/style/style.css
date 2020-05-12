@@ -166,6 +166,21 @@ p.list-group {
   right: 150px;
 }
 
+#inlineFormCustomSelect{
+position: relative;
+text-align: center;
+width: 2cm;
+padding-right: 1cm;
+height: 2cm;
+}
+
+#start-btn{
+  left: 200px;
+  text-align: center;
+  background-color:#79ff6c ;
+  color: black;
+}
+
 
 .modal-title{
   text-align: center;
@@ -175,7 +190,7 @@ p.list-group {
 @media only screen and (max-width: 600px) {
   .modal-title{
     text-align: center;
-    padding-left: 110px;
+    padding-left: 95px;
   }
 }
 
