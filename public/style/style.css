@@ -5,16 +5,37 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 110px;
 }
 
-.container{
-  padding: 0px;
+#list{
   background-color: #0b0c22;
   width: 100%;
+  height: 430px;
   overflow-y: scroll;
   scroll-behavior: smooth;
-  height: 430px;
   display: inline-block;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-thumb{
+  background : linear-gradient(
+    45deg,
+    #06dee1,
+    #79ff6c
+  );
+  border-radius: 5px;
+}
+
+#login{
+  padding-top: 10px;
+  background-color: #0b0c22;
+  width: 500px;
+  height: 430px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -88,19 +109,11 @@ Stylesheet of Professor Dashboard
 #body{
   background: #0b0c22;
   padding-top: 110px;
-  padding-left: 40px;
+  padding-left: 20px;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
-::-webkit-scrollbar{
-  width: 20px;
-}
-::-webkit-scrollbar-thumb{
-  background : linear-gradient(
-    45deg,
-    #06dee1,
-    #79ff6c
-  );
-  border-radius: 10px;
-}
+
 
 /* Navbar */
 .navbar{
@@ -114,11 +127,10 @@ Stylesheet of Professor Dashboard
   padding-top:6px !important;
   padding-bottom:0 !important;
   height: 33px;
-  color:black;
 }
 
 .navbar-default {
-  background-color: lightskyblue;
+  background-color: rgb(119, 160, 185);
   border-color: lightcyan;
 }
 .navbar-default .navbar-brand {
@@ -135,24 +147,70 @@ Stylesheet of Professor Dashboard
   text-align: center;
 }
 
+a{
+  color: #0b0c22;
+}
+
 p.list-group {
   font-size: 2vw;
 }
-.center {
+.main-section {
   position: absolute;
   top: 100px;
   width: 80%;
   text-align: center;
 }
 #btn-manually{
-  background-color: #06dee1;
+  border-color: #06dee1;
 }
 
 #btn-randomly{
-  background-color: #79ff6c;
+  border-color: #79ff6c;
+
 }
 #btn-manually, #btn-randomly{
+  border-width: 5px;
+  background-color: #0b0c22;
+  color: white;
+  border-style: solid;
   padding: 20px;
-  border-radius: 10px;
   margin: 15px;
 }
+
+#set-timer-btn{
+  background-color: #79ff6c;
+  color: black;
+  position: absolute;
+  text-align: center;
+  top: 100px;
+  right: 150px;
+}
+
+#inlineFormCustomSelect{
+position: relative;
+text-align: center;
+width: 2cm;
+padding-right: 1cm;
+height: 2cm;
+}
+
+#start-btn{
+  left: 200px;
+  text-align: center;
+  background-color:#79ff6c ;
+  color: black;
+}
+
+
+.modal-title{
+  text-align: center;
+  padding-left: 180px;
+}
+
+@media only screen and (max-width: 600px) {
+  .modal-title{
+    text-align: center;
+    padding-left: 95px;
+  }
+}
+
