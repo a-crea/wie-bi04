@@ -10,10 +10,28 @@
   <title>Add user</title>
 </head>
 <body>
+  <div class="modal fade" id="modal-message" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-label"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container text-center">
     <h1>Add user</h1>
     <div class="col-12 text-center">
-      <form class="needs-validation" novalidate>
+      <form id="signup-form" class="needs-validation" novalidate>
         <div class="form-row">
           <div class="form-group text-center m-auto pt-4">
             <label for="email">Full name</label>
@@ -46,7 +64,13 @@
         </div>
         <div class="form-row">
           <div class="form-group text-center m-auto pt-4">
-            <button type="submit" class="btn btn-success">Add user</button>
+            <button id="save-button" type="submit" class="btn btn-success">
+              Add user
+            </button>
+            <button id="saving-button" class="btn btn-primary" style="display: none;" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Saving...
+            </button>
           </div>
         </div>
       </form>
@@ -73,7 +97,6 @@
         var forms = document.getElementsByClassName('needs-validation');
         var validation = Array.prototype.filter.call(forms, function (form) {
           form.addEventListener('submit', function (event) {
-            console.log(form);
             if (form.checkValidity() === true) {
               addUser();
             }
@@ -87,6 +110,13 @@
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
           console.log(user);
+          var docRef = db.collection("teaching").doc(user.email);
+          docRef.get().then(function (doc) {
+            if (!doc.exists) {
+              let url = window.location.origin;
+              window.location.replace(url + "/index.html");
+            }
+          })
         } else {
           console.log("user not logged in");
           let url = window.location.origin;
@@ -99,6 +129,8 @@
       let psw = $("input[name=password]").val();
       let role = $("input[name=role]:checked").val();
       if(name != null && email != null && psw != null && role != null){
+        $("#save-button").hide();
+        $("#saving-button").show();
         let signUp = firebase.functions().httpsCallable('signUpUser');
         let send = {
           name: name,
@@ -107,41 +139,33 @@
           role: role
         }
         signUp(send).then((result) => {
-          console.log(result);
+          $("#save-button").show();
+          $("#saving-button").hide();
+          if(result.data.state == true){
+            launchModal("Success", "User correctly registered!");
+            resetInputs();
+          } else {
+            launchModal("Warning", "Something went wrong, please try again.");
+          }
         })
-        // firebase.auth().createUserWithEmailAndPassword(email, psw)
-        // .then(function(){
-        //   console.log("user created");
-        //   let addDoc = db.collection('users').add({
-        //   name: name,
-        //   email: email,
-        //   role: role
-        //   }).then(ref => {
-        //     // console.log('Added document with ID: ', ref.id);
-        //   });
-        //   if(role=="professor"){
-        //     console.log("message")
-        //     db.collection("teaching").doc(email).set({})
-        //       .then(function () {
-        //         console.log("Document successfully written!");
-        //       })
-        //       .catch(function (error) {
-        //         console.error("Error writing document: ", error);
-        //       });
-        //   }
-        // })
-        // .catch(function (error) {
-        //   var errorCode = error.code;
-        //   var errorMessage = error.message;
-        //   console.log(error);
-        // });
-
-
       }
       else{
-
+        launchModal("Warning", "Please, check the values inserted.");
       }
+    }
+    function launchModal(label,body){
+      $('#modal-label').html(label);
+      $('#modal-body').html(body);
+      $('#modal-message').modal('toggle');
     } 
+    function resetInputs(){
+      $("#signup-form").removeClass("was-validated");
+      $("input[name=name]").val("");
+      $("input[name=email]").val("");
+      $("input[name=password]").val("");
+      $("input[name=role]:checked").val("");
+    }
+
   </script>
 </body>
 </html>

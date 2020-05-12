@@ -38,30 +38,30 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
   <script type="text/javascript">
-    // firebase.auth().onAuthStateChanged(function (user) {
-    //   if (user) {
-    //      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
-    //      .then(function () {
-    //         // Existing and future Auth states are now persisted in the current
-    //         // session only. Closing the window would clear any existing state even if
-    //         // a user forgets to sign out.
-    //       });
-    //     let url = window.location.origin;
-    //     window.location.replace(url + "/signup_test.html");
-    //   } else {
-    //     console.log("user not logged in");
-    //   }
-    // });
-    // function login() {
-    //   let email = document.getElementById("email").value;
-    //   let password = document.getElementById("password").value;
-    //   firebase.auth().signInWithEmailAndPassword(email, password)
-    //     .then(function (result) {
-    //       console.log(result);
-    //     }).catch(function (error) {
-    //       console.log(error);
-    //     });
-    // } 
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+         .then(function () {
+            // Existing and future Auth states are now persisted in the current
+            // session only. Closing the window would clear any existing state even if
+            // a user forgets to sign out.
+          });
+        let url = window.location.origin;
+        window.location.replace(url + "/signup_test.html");
+      } else {
+        console.log("user not logged in");
+      }
+    });
+    function login() {
+      let email = document.getElementById("email").value;
+      let password = document.getElementById("password").value;
+      firebase.auth().signInWithEmailAndPassword(email, password)
+        .then(function (result) {
+          console.log(result);
+        }).catch(function (error) {
+          console.log(error);
+        });
+    } 
   </script>
 </body>
 
