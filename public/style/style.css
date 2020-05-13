@@ -214,6 +214,8 @@ p.list-group {
 /*
 Stylesheet of Random Groups
 */
+
+
 .groups-container{
   width: 100%;
   height: 80%;
@@ -267,4 +269,39 @@ Users-manually
   border-style: solid;
   padding: 20px;
   margin: 15px;
+}
+
+/* Group view*/
+
+.room-container{
+  position: relative;
+  border: solid;
+  width: 100%;
+  height: 400px;
+}
+
+.room-container > div{
+  border: solid;
+  position: absolute;
+  width: 30%;
+  height: 40%;
+  padding: 5px;
+}
+
+#room2{
+  left: 35%;
+}
+#room3{
+  right: 0%;
+  }
+#room4{
+  bottom: 0%;
+}
+#room5{
+  left: 35%;
+  bottom: 0%;
+}
+#room6{
+  right: 0%;
+  bottom: 0%;
 }
