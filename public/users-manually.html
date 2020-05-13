@@ -12,14 +12,14 @@
   <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script src="https://cdn.rawgit.com/crlcu/multiselect/v2.5.1/dist/js/multiselect.min.js"></script>
-  <title>Match users manually</title>
+  <title>Dashboard Professor</title>
   <link href="style/style.css" rel="stylesheet">
 </head>
 
 <body id = "dashboard-body">
 
     <nav class="navbar fixed-top navbar-default">
-        <a class="navbar-brand" href="professor-layout.html">Dashboard</a>
+        <a class="navbar-brand" href="#">Dashboard</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -30,86 +30,69 @@
   </nav>
 
   <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-4">
       <h2 class="textDefault">STUDENTS</h2>
       <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-     
+      <div id="list">
         <ul class="list-group" id="students-list">
-            <select name="from[]" id="multiselect" class="form-control" size="10" multiple="multiple">
-            <option class="list-group-item">Vera Belingheri</li>
-            <option class="list-group-item">Dapibus ac facilisis in</li>
-            <option class="list-group-item">Angelina Albertinelli Pavinska</li>
-            <option class="list-group-item">Porta ac consectetur ac</li>
-            <option class="list-group-item">Vestibulum at eros</li>
-            <option class="list-group-item">Cras justo odio</li>
-            <ption class="list-group-item">Dapibus ac facilisis in</li>
-            <option class="list-group-item">Morbi leo risus</li>
-            <option class="list-group-item">Porta ac consectetur ac</li>
-            <option class="list-group-item">Vestibulum at eros</li>
-            <option class="list-group-item">Cras justo odio</li>
-            <option class="list-group-item">Dapibus ac facilisis in</li>
-            <option class="list-group-item">Morbi leo risus</li>
-            <option class="list-group-item">Porta ac consectetur ac</li>
-            <option class="list-group-item">Vestibulum at eros</li>
-            </select>
-            </ul>
-            </div>
-  
-            <div class="col-xs-7">
-              <button type="button" id="multiselect_rightAll" class="btn btn-block"><i class="glyphicon glyphicon-forward"></i></button>
-              <button type="button" id="multiselect_rightSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-right"></i></button>
-              <button type="button" id="multiselect_leftSelected" class="btn btn-block"><i class="glyphicon glyphicon-chevron-left"></i></button>
-              <button type="button" id="multiselect_leftAll" class="btn btn-block"><i class="glyphicon glyphicon-backward"></i></button>
-            
-              <select name="to[]" id="multiselect_to" class="form-control" size="8" multiple="multiple"></select>
-        
-        
-        <script>$('#multiselect').multiselect();</script>
-  
-
+          <select id='pre-selected-options' multiple='multiple'>
+            <option value='elem_1'>Anita Tossi</option>
+            <option value='elem_2'>Alessandro Crea</option>
+            <option value='elem_3'>Vera Belingheri</option>
+            <option value='elem_4'>Fritz Humus</option>
+            <option value='elem_100'>Frida Hansdotter</option>
+          </select>
+          </ul>
+          </div>
+          <!-- ends -->
+          <!-- jQuery -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+          <!-- Bootstrap JavaScript -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+          <script src="js/jquery.multi-select.js"></script>
+          <script type="text/javascript">
+          // run pre selected options
+          $('#pre-selected-options').multiSelect();
+          </script>
+    
+    </div>
       <div><button type="button" id="btn-room" class="btn btn-lg">
         <h3 class="text-default">CREATE ROOM</h3></button></div> 
-      </div> 
-       
-        <div class="col-sm-2">
-          <!-- Trigger the modal with a button -->
-        <div class="start-container">
-        <button type="button" class="btn btn-info btn-lg textDefault" id="set-timer-btn" data-toggle="modal" data-target="#myModal">Set timer</button>
-        </div>
 
-        <!-- Modal -->
-        <div id="myModal" class="modal fade" role="dialog">
-        <div class="modal-dialog">
+         <!-- Trigger the modal with a button -->
+<button type="button" class="btn btn-info btn-lg" id="set-timer-btn" data-toggle="modal" data-target="#myModal">Set timer</button>
 
-        <!-- Modal content-->
-        <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Set timer</h4>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-row align-items-center">
-              <div class="col-auto my-1">
-                <label class="mr-sm-2" for="inlineFormCustomSelect">Choose the minutes</label>
-                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                  <option value="1" selected>5 </option>
-                  <option value="2">10 </option>
-                  <option value="3">15 </option>
-                  <option value="4">20 </option>
-                  <option value="5">25 </option>
-                  <option value="6">30 </option>
-                </select>
-              </div>
-              </form>
-        </div>
-            <div class="modal-footer">
-            <button type="button" id = "start-btn" class="btn btn-success btn-block" data-dismiss="modal">Start</button>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Set timer</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-row align-items-center">
+            <div class="col-auto my-1">
+              <label class="mr-sm-2" for="inlineFormCustomSelect">Choose the minutes</label>
+              <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                <option value="1" selected>5 </option>
+                <option value="2">10 </option>
+                <option value="3">15 </option>
+                <option value="4">20 </option>
+                <option value="5">25 </option>
+                <option value="6">30 </option>
+              </select>
             </div>
-        </div>
-        </div>
-        </div>
-        </div>
-</div>
+            </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id = "start-btn" class="btn btn-success btn-block" data-dismiss="modal">Start</button>
+      </div>
+    </div>
+ </div>
+ </div>
  
 
   <script src="/__/firebase/7.14.2/firebase-app.js"></script>
