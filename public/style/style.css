@@ -233,19 +233,3 @@ Users-manually
   margin: 15px;
 }
 
-#multiselect_rightAll{
-  color: white;
- 
-}
-
-#multiselect_rightSelected{
-  color: white;
-}
-
-#multiselect_leftSelected{
-  color:white;
-}
-
-#multiselect_leftAll{
-  color: white;
-}
