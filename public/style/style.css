@@ -218,3 +218,34 @@ p.list-group {
   }
 }
 
+
+/*
+Users-manually
+*/
+
+#btn-room{
+  border-color: #06dee1;
+  border-width: 5px;
+  background-color: #0b0c22;
+  color: white;
+  border-style: solid;
+  padding: 20px;
+  margin: 15px;
+}
+
+#multiselect_rightAll{
+  color: white;
+ 
+}
+
+#multiselect_rightSelected{
+  color: white;
+}
+
+#multiselect_leftSelected{
+  color:white;
+}
+
+#multiselect_leftAll{
+  color: white;
+}
