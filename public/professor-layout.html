@@ -19,7 +19,7 @@
           <span class="navbar-toggler-icon"></span>
         </button>
           <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Welcome, Billero</a></li>
+          <li><a href="#">Welcome, <span id="professor-name"></span></a></li>
           <li><a href="index.html">Logout</a></li>
           </ul>
   </nav>
@@ -30,22 +30,7 @@
         <input class="form-control" type="search" placeholder="Search" aria-label="Search">
           <div id="list">
             <ul class="list-group" id="students-list">
-            <li class="list-group-item">Vera Belingheri</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Angelina Albertinelli Pavinska</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-          </ul>
+            </ul>
         </div>
       </div>
 
@@ -114,17 +99,18 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
   <script type="text/javascript">
-  /*
-
+  
+/*
     var studentsInfo={};
     var groups = [];
     var db = firebase.firestore();
     var realTimeDb = firebase.database();
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-          var docRef = db.collection("teaching").doc(user.email);
+          var docRef = db.collection("teaching").doc(user.uid);
           docRef.get().then(function (doc) {
             if (doc.exists) {
+              $("#professor-name").html(user.displayName);
               getStudents(doc);
               // createRealTimeDb(user.uid);
               // REFER TO REALTIMEDB.JSON

@@ -34,7 +34,7 @@
       <form id="signup-form" class="needs-validation" novalidate>
         <div class="form-row">
           <div class="form-group text-center m-auto pt-4">
-            <label for="email">Full name</label>
+            <label for="name">Full name</label>
             <input id="name" name="name" type="text" class="form-control" required>
           </div>
         </div>
@@ -110,7 +110,7 @@
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
           console.log(user);
-          var docRef = db.collection("teaching").doc(user.email);
+          var docRef = db.collection("teaching").doc(user.uid);
           docRef.get().then(function (doc) {
             if (!doc.exists) {
               let url = window.location.origin;
@@ -163,7 +163,6 @@
       $("input[name=name]").val("");
       $("input[name=email]").val("");
       $("input[name=password]").val("");
-      $("input[name=role]:checked").val("");
     }
 
   </script>

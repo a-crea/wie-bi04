@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="wie-bi04">
+  <meta name="description" content="wie-bi04-project">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <title>Assign students to professors</title>
+</head>
+<body>
+  <div class="modal fade" id="modal-message" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modal-label"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" id="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container text-center">
+    <h1>Select Professor</h1>
+      <div class="form-group">
+        <label for="professors-list">Professors</label>
+        <select class="form-control" id="professors-list">
+        </select>
+      </div>
+    <div id="students-container" style="display: none;">
+      <h1>Select students</h1>
+      <div class="form-group">
+        <label for="professors-list">Students</label>
+        <select multiple class="form-control" id="students-list"></select>
+      </div>
+    </div>
+    <div id="students-selected-container">
+      <h1>Selected students</h1>
+      <div id="students-list-selected">
+      </div>
+    </div>
+    <div id="students-already-assigned-container" style="display: none;">
+      <h1>Students already assigned to this professor</h1>
+      <div id="students-list-already-assigned">
+
+      </div>
+    </div>
+        <div class="form-row">
+          <div class="form-group text-center m-auto pt-4">
+            <button id="save-button" onclick="save()" class="btn btn-success">
+              Save
+            </button>
+            <button id="saving-button" class="btn btn-primary" style="display: none;" disabled>
+              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Saving...
+            </button>
+          </div>
+        </div>
+  </div>
+
+  <script src="/__/firebase/7.14.2/firebase-app.js"></script>
+  <script src="/__/firebase/7.14.2/firebase-auth.js"></script>
+  <script src="/__/firebase/7.14.2/firebase-firestore.js"></script>
+  <script src="/__/firebase/7.14.2/firebase-database.js"></script>
+  <script src="/__/firebase/7.14.2/firebase-functions.js"></script>
+  <script src="/__/firebase/init.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+/*
+
+  (function () {
+      'use strict';
+      window.addEventListener('load', function () {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function (form) {
+          form.addEventListener('submit', function (event) {
+            if (form.checkValidity() === true) {
+              addUser();
+            }
+            event.preventDefault();
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+    var db = firebase.firestore();
+    var profUid;
+    var profUidSelected = null;
+    var students = {};
+    var studentsOld;
+    var professors = {};
+    $(function () {
+      $("#professors-list").change(function () {
+        profUidSelected = $("#professors-list option:selected").val();
+        console.log("here")
+        $("#students-list-selected").html("");
+        $("#sstudents-list-already-assigned").html("");
+        // console.log($("#professors-list option:selected").val());
+        // Object.keys(students).forEach(function (key) {
+        //   students[key].toSave = false;
+        // });
+        disableAlreadyAssigned();
+        if(profUidSelected!=null)
+        {
+          getListStudentsAlreadyAssignedForSelectedProf()};
+      });
+    });
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          profUid = user.uid;
+          var docRef = db.collection("teaching").doc(profUid);
+          docRef.get().then(function (doc) {
+            if (!doc.exists) {
+              let url = window.location.origin;
+              window.location.replace(url + "/index.html");
+            }
+            else{
+              getListProfs();
+            }
+          })
+        } else {
+          console.log("user not logged in");
+          let url = window.location.origin;
+          window.location.replace(url + "/index.html");
+        }
+      });
+    function getListProfs(){
+      let selectProf = $("#professors-list");
+      db.collection("users").where("role", "==", "professor")
+          .get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              if(profUidSelected==null){
+                profUidSelected = doc.id;
+              }
+              professors[doc.id]={
+                name: doc.data().name,
+                email: doc.data().email
+              }
+              selectProf.append('<option value="' + doc.id + '">' + doc.data().name + ' - ' + doc.data().email + '</option>');
+            });
+            getListStudents();
+            getListStudentsAlreadyAssignedForSelectedProf();
+          })
+          .catch(function (error) {
+            console.log("Error getting documents: ", error);
+          });
+  
+    }
+
+    function getListStudents(){
+      $("#students-container").show();
+      let selectStudents = $("#students-list");
+       db.collection("users").where("role", "==", "student")
+        .get()
+        .then(function (querySnapshot) {
+          querySnapshot.forEach(function (doc) {
+            selectStudents.append('<option onclick=addStudent("' + doc.id + '") id="' + doc.id + '">' + doc.data().name + ' - ' + doc.data().email + '</option>');
+            let id = doc.id;
+            let name = doc.data().name;
+            let email = doc.data().email;
+            students[id]={
+              id: id,
+              name: name,
+              email: email,
+              toSave: false,
+              assignedTo:null
+            }; 
+          });
+          studentsOld = students;
+          getListStudentsAlreadyAssigned();
+        })
+        .catch(function (error) {
+          console.log("Error getting documents: ", error);
+        });
+    }
+    function getListStudentsAlreadyAssigned(){
+      let data = [];
+      let arr, val;
+      db.collection("teaching").get()
+          .then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              if(doc.data().students){
+                let idProf = doc.id;
+                arr = doc.data().students;
+                arr.forEach(id => {
+                  studentsOld[id].assignedTo = idProf;
+                });
+              }
+            });
+            disableAlreadyAssigned();
+      });
+    }
+    function getListStudentsAlreadyAssignedForSelectedProf(){
+      let studentsAlreadyAssignedContainer = $("#students-already-assigned-container");
+      let studentsAlreadyAssigned = $("#students-list-already-assigned");
+      studentsAlreadyAssigned.html("")
+      db.collection("teaching").doc(profUidSelected).get().then(function (doc) {
+        if(Object.keys(doc.data()).length === 0 && doc.data().constructor === Object){
+          studentsAlreadyAssignedContainer.hide();
+        } else {
+          let data = doc.data().students;
+          studentsAlreadyAssignedContainer.show();
+          data.forEach(idStud => {
+            console.log(idStud)
+            studentsAlreadyAssigned.append('<p id="' + idStud + '">' + students[idStud].name + ' - ' + students[idStud].email + '<button class="btn btn-danger" onclick=deleteStudent("old","' + idStud + '")>Delete</button></p>');
+            $("#students-list>#" + idStud).attr('disabled', 'disabled');
+            students[idStud].toSave = true;
+            students[idStud].assignedTo = profUidSelected;
+          });
+        }
+      })
+    }
+    function addStudent(idStud){
+      let option = $("#students-list>#" + idStud);
+      let studentsSelected = $("#students-list-selected");
+      option.attr('disabled', 'disabled');
+      studentsSelected.append('<p id="'+ idStud +'">' + students[idStud].name + ' - ' + students[idStud].email + '<button class="btn btn-danger" onclick=deleteStudent("now","' + idStud + '")>Delete</button></p>');
+      students[idStud].toSave = true;
+      students[idStud].assignedTo = profUidSelected;
+    }
+    function deleteStudent(from, idStud){
+      let option = $("#students-list>#" + idStud);
+      if(from == "now"){
+          console.log("NOW " +idStud);
+         $("#students-list-selected>#" + idStud).remove();
+      } else {
+        console.log("GIA " +idStud);
+         $("#students-list-already-assigned>#" + idStud).remove();
+      }
+      option.removeAttr('disabled');
+      let val = option.text();
+      let index = val.lastIndexOf("Prof")
+      val = val.slice(0, index-2)
+      option.text(val);
+      students[idStud].toSave = false;
+      students[idStud].assignedTo = null;
+    }
+
+    function clearSelected(){
+      students = studentsOld;
+    }
+    function disableAlreadyAssigned(){
+      let idProf, index;
+      console.log(studentsOld)
+      Object.keys(studentsOld).forEach(function (id) {
+        if (studentsOld[id].assignedTo) {
+          idProf = studentsOld[id].assignedTo;
+          $("#students-list>#" + id).attr('disabled', 'disabled');
+          val = $("#students-list>#" + id).text();
+          index = val.lastIndexOf("Prof")
+          val = val.slice(0, index - 2)
+          val += " - Prof " + professors[idProf].name;
+          $("#students-list>#" + id).text(val);
+        }
+      });
+
+    }
+
+    function save(){
+      $("#save-button").hide();
+      $("#saving-button").show();
+
+      let tempStud = students;
+      let selectedStudentsToSave = [];
+      let errorFound = false;
+      let updates;
+      Object.keys(professors).forEach(function (keyProf) {
+        Object.keys(students).forEach(function (keyStud) {
+          if(students[keyStud].assignedTo == keyProf){
+            selectedStudentsToSave.push(keyStud);
+            delete students[keyStud];
+          }
+        });
+        if(selectedStudentsToSave.length>0){
+          db.collection("teaching").doc(keyProf).set({
+            students: selectedStudentsToSave
+          }).then(() => {
+            
+          }).catch((error) => {
+            errorFound = true;
+            console.log(error);
+          });
+        }
+        selectedStudentsToSave = [];
+        
+      });
+      if(errorFound === false){
+        launchModal("Success", "Students correctly assigned!");
+      } else {
+        launchModal("Error", "An error occured. Please try again.");
+      } 
+      errorFound = false;
+      $("#save-button").show();
+      $("#saving-button").hide();
+      studentsOld = students;
+      
+      disableAlreadyAssigned();
+    }
+
+    function launchModal(label,body){
+      $('#modal-label').html(label);
+      $('#modal-body').html(body);
+      $('#modal-message').modal('toggle');
+    } 
+*/
+
+  </script>
+</body>
+</html>

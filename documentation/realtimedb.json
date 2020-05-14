@@ -1,16 +1,25 @@
 {
-    "endtime":endtime,
     "id_stud":{
         "state": away,
-        "name":name students,
-        "room": id-room
+        "name":name student,
+        "room": id-room,
+        "prof": id-prof
     },
     "...",
-    "id-room":{
-        "moreTime": false,
-        "needsHelp": false,
-        "messages":[{
-            "m1":..
-        }] /*Implentare per far sapere al prof i messaggi precedenti (NON NECESSARIO PER IL PROGETTO)*/
-    }
+    "id-prof":[//prof listen to changes here
+        {
+            "id-room": {//student listen for change here
+                "endtime":endtime,
+                "moreTime": false,
+                "needsHelp": false,
+                "messages": [
+                    {
+                        "m1":..
+                    }
+                ] /*Implentare per far sapere al prof i messaggi precedenti (NON NECESSARIO PER IL PROGETTO)*/
+            }
+        },
+        room....
+    ],
+
 }

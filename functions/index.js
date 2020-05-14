@@ -20,7 +20,9 @@ exports.signUpUser = functions.https.onCall((data, context) => {
             role: role
         }).then(() => {
             if (role === "professor") {
-                return db.collection("teaching").doc(email).set({}).then(() => {
+                return db.collection("teaching").doc(userRecord.uid).set({
+                    students:null
+                }).then(() => {
                     return { state: true };
                 }).catch((error) => {
                     return { error: error };
@@ -39,6 +41,6 @@ exports.signUpUser = functions.https.onCall((data, context) => {
 
 exports.userDeleted = functions.auth.user().onDelete(user => {
     db.collection("users").doc(user.uid).delete();
-    db.collection("teaching").doc(user.email).delete();
+    db.collection("teaching").doc(user.uid).delete();
     return true;
 });
