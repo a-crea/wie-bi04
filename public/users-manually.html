@@ -8,80 +8,98 @@
   <meta name="author" content="Rossi Crea Belingheri">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="https://cdn.rawgit.com/crlcu/multiselect/v2.5.1/dist/js/multiselect.min.js"></script>
   <title>Dashboard Professor</title>
   <link href="style/style.css" rel="stylesheet">
-
-  <script>
-    function matchRandomly() {
-            let url = window.location.href;
-            let lastSlash = url.lastIndexOf('/');
-            let basePath = url.slice(0,lastSlash+1)
-            window.location.replace(basePath+"users-randomly.html")
-        }
-        function matchManually() {
-            let url = window.location.href;
-            let lastSlash = url.lastIndexOf('/');
-            let basePath = url.slice(0,lastSlash+1)
-            window.location.replace(basePath+"users-manually.html")
-        }
-  </script>
-
 </head>
-<body id="dashboard-body">
 
-  <nav class="navbar fixed-top navbar-default">
-        <a class="navbar-brand" href="#">Dashboard</a>
+<body id = "dashboard-body">
+
+    <nav class="navbar fixed-top navbar-default">
+        <a class="navbar-brand" href="professor-layout.html">Dashboard</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
           <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Welcome, <span id="professor-name"></span></a></li>
+          <li><a href="#">Welcome, Billero</a></li>
           <li><a href="index.html">Logout</a></li>
           </ul>
   </nav>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-sm-3">
-        <h2 class="textDefault">STUDENTS</h2>
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-          <div id="list">
-            <ul class="list-group" id="students-list">
-<<<<<<< HEAD
-            </ul>
-        </div>
-=======
-            <li class="list-group-item">Vera Belingheri</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Angelina Albertinelli Pavinska</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
+
+  <div class="row">
+    <div class="col-sm-7">
+      <h2 class="textDefault">STUDENTS</h2>
+      <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+      <div id="list">
+        <ul class="list-group" id="students-list">
+          <select id='pre-selected-options' multiple='multiple'>
+            <option value='elem_1'>Anita Tossi</option>
+            <option value='elem_2'>Alessandro Crea</option>
+            <option value='elem_3'>Vera Belingheri</option>
+            <option value='elem_4'>Kjetil Jansrud</option>
+            <option value='elem_100'>Frida Hansdotter</option>
+          </select>
+          </ul>
           </div>
->>>>>>> 76bd8b209fa7ee24bcbd6f9e8eca3ae31b025088
+          <!-- ends -->
+          <!-- jQuery -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+          <!-- Bootstrap JavaScript -->
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+          <script src="js/jquery.multi-select.js"></script>
+          <script type="text/javascript">
+          // run pre selected options
+          $('#pre-selected-options').multiSelect();
+          </script>
+    </div>
+    <div class="col-sm-3">
+      <button type="button" id="btn-room" class="btn btn-lg">
+        <h3 class="text-default">CREATE ROOM</h3>
+      </button>
+    </div> 
+    <div class="col-sm-2">
+      <!-- Trigger the modal with a button -->
+      <div class="start-container">
+        <button type="button" class="btn btn-info btn-lg textDefault" id="set-timer-btn" data-toggle="modal" data-target="#myModal">Set timer</button>
       </div>
 
-      <div class="col-sm-7">
-       <div class="main-section">
-        <h1 class="textDefault">CREATE ROOMS</h1>
-        <button type="button" id="btn-manually" onclick="matchManually()" class="btn btn-lg">
-          <h3 class="text-default">MATCH USERS MANUALLY</h3></button>
-        <div><button type="button" id="btn-randomly" onclick="matchRandomly()" class="btn btn-lg">
-          <h3 class="text-default">MATCH USERS RANDOMLY</h3></button></div>
+      <!-- Modal -->
+      <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Set timer</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="form-row align-items-center">
+                  <div class="col-auto my-1">
+                    <label class="mr-sm-2" for="inlineFormCustomSelect">Choose the minutes</label>
+                    <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                      <option value="1" selected>5 </option>
+                      <option value="2">10 </option>
+                      <option value="3">15 </option>
+                      <option value="4">20 </option>
+                      <option value="5">25 </option>
+                      <option value="6">30 </option>
+                    </select>
+                  </div>
+                  </form>
+            </div>
+                <div class="modal-footer">
+                <button type="button" id = "start-btn" class="btn btn-success btn-block" data-dismiss="modal">Start</button>
+                </div>
+          </div>
         </div>
       </div>
-
-</div>
-</div>
+    </div>
+ </div>
+ </div>
  
 
   <script src="/__/firebase/7.14.2/firebase-app.js"></script>
@@ -100,21 +118,17 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
   <script type="text/javascript">
-  
-/*
     var studentsInfo={};
     var groups = [];
     var db = firebase.firestore();
     var realTimeDb = firebase.database();
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-          var docRef = db.collection("teaching").doc(user.uid);
+          var docRef = db.collection("teaching").doc(user.email);
           docRef.get().then(function (doc) {
             if (doc.exists) {
-              $("#professor-name").html(user.displayName);
               getStudents(doc);
               // createRealTimeDb(user.uid);
-              // REFER TO REALTIMEDB.JSON
             } else {
               let url = window.location.origin;
               window.location.replace(url + "/index.html");
@@ -189,8 +203,6 @@
     $(function () {
         $("#students-list").html("");
       });
-      
-    */
   </script>
 
 </body>
