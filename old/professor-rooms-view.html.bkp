@@ -8,81 +8,54 @@
   <meta name="author" content="Rossi Crea Belingheri">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <title>Dashboard Professor</title>
+  <title>Rooms view</title>
   <link href="style/style.css" rel="stylesheet">
-
-  <script>
-    function matchRandomly() {
-            let url = window.location.href;
-            let lastSlash = url.lastIndexOf('/');
-            let basePath = url.slice(0,lastSlash+1)
-            window.location.replace(basePath+"users-randomly.html")
-        }
-        function matchManually() {
-            let url = window.location.href;
-            let lastSlash = url.lastIndexOf('/');
-            let basePath = url.slice(0,lastSlash+1)
-            window.location.replace(basePath+"users-manually.html")
-        }
-  </script>
-
 </head>
 <body id="dashboard-body">
-
   <nav class="navbar fixed-top navbar-default">
-        <a class="navbar-brand" href="#">Dashboard</a>
+        <a class="navbar-brand" href="professor-layout.html">Dashboard</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
           <span class="navbar-toggler-icon"></span>
         </button>
           <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Welcome, <span id="professor-name"></span></a></li>
+          <li><a href="#">Welcome, Billero</a></li>
           <li><a href="index.html">Logout</a></li>
           </ul>
   </nav>
   <div class="container-fluid">
+    <div id="ciao"></div>
     <div class="row">
-      <div class="col-sm-3">
-        <h2 class="textDefault">STUDENTS</h2>
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-          <div id="list">
-            <ul class="list-group" id="students-list">
-<<<<<<< HEAD
-            </ul>
+    <div class="col-sm-9">
+      <div class="row">
+        <div id="timer" style="color:white;">
+          <H1>TIMER</H1>
+          <H3>15:00</H3>
         </div>
-=======
-            <li class="list-group-item">Vera Belingheri</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Angelina Albertinelli Pavinska</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Morbi leo risus</li>
-            <li class="list-group-item">Porta ac consectetur ac</li>
-            <li class="list-group-item">Vestibulum at eros</li>
-            </ul>
+      </div>
+      <div class="row">
+        <div class="main-section">
+          <h1 class="textDefault">ROOMS VIEW</h1>
+          <div class="room-container">
+            <div id="room1"></div>
+            <div id="room2"></div>
+            <div id="room3"></div>
+            <div id="room4"></div>
+            <div id="room5"></div>
+            <div id="room6"></div>
           </div>
->>>>>>> 76bd8b209fa7ee24bcbd6f9e8eca3ae31b025088
-      </div>
-
-      <div class="col-sm-7">
-       <div class="main-section">
-        <h1 class="textDefault">CREATE ROOMS</h1>
-        <button type="button" id="btn-manually" onclick="matchManually()" class="btn btn-lg">
-          <h3 class="text-default">MATCH USERS MANUALLY</h3></button>
-        <div><button type="button" id="btn-randomly" onclick="matchRandomly()" class="btn btn-lg">
-          <h3 class="text-default">MATCH USERS RANDOMLY</h3></button></div>
         </div>
       </div>
+    </div>
+    <div class="col-sm-3">
+      <ul id="notifications" class="list-group">
+        <li class="list-group-item">
+          NOTIFICATION HERE
+        </li>
+      </ul>
+    </div>
+    </div>
 
-</div>
-</div>
- 
+  </div>
 
   <script src="/__/firebase/7.14.2/firebase-app.js"></script>
   <script src="/__/firebase/7.14.2/firebase-auth.js"></script>
@@ -90,9 +63,7 @@
   <script src="/__/firebase/7.14.2/firebase-database.js"></script>
   <script src="/__/firebase/init.js"></script>
 
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
     crossorigin="anonymous"></script>
@@ -100,18 +71,22 @@
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
     crossorigin="anonymous"></script>
   <script type="text/javascript">
-  
-/*
+          $(document).ready(function () {
+            console.log($('#ciao'))
+            $('#ciao').load("test.html");
+          });
+
+  /*
+
     var studentsInfo={};
     var groups = [];
     var db = firebase.firestore();
     var realTimeDb = firebase.database();
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-          var docRef = db.collection("teaching").doc(user.uid);
+          var docRef = db.collection("teaching").doc(user.email);
           docRef.get().then(function (doc) {
             if (doc.exists) {
-              $("#professor-name").html(user.displayName);
               getStudents(doc);
               // createRealTimeDb(user.uid);
               // REFER TO REALTIMEDB.JSON

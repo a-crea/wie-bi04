@@ -1,5 +1,7 @@
 public
     |
+    |--/components
+    |   |-> subfolders/html files for changing view
     |--/img
     |   |-> All imgages
     |--/js
