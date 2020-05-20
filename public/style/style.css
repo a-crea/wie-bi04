@@ -392,3 +392,28 @@ Users-manually
   right: 0%;
   bottom: 0%;
 }
+
+
+/* students-view */
+
+  #column-participant {
+    float: left;
+    width: 50%;
+    padding: 10px;
+    height: 478px; 
+  }
+  
+  #row-participant:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#names-participants{
+text-align: center;
+
+}
+
+#timer{
+  padding-left: 25px;
+}
