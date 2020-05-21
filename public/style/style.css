@@ -418,3 +418,26 @@ text-align: center;
   padding-left: 10px;
 }
 
+
+.container {
+  position: relative;
+  background: lightgray;
+}
+
+.box-orange {
+  position: fixed;
+  background: lightskyblue;
+  width: 200px;
+  height: 200px;
+  right: 5px;  
+  text-align: center;  
+}
+
+.box-blue {
+  background: lightyellow;
+  height: 200px;
+  width: 200px; 
+  position: fixed; 
+  bottom: 0cm;
+  text-align: center;
+}
