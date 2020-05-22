@@ -429,16 +429,16 @@ line-height: 400px;
 .box-blue {
   position: absolute;
   background: lightskyblue;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   right: 0px;  
   text-align: center;  
 }
 
 .box-yellow {
   background: lightyellow;
-  height: 200px;
-  width: 200px; 
+  height: 180px;
+  width: 180px; 
   position: absolute; 
   bottom: 0cm;
   text-align: center;
@@ -447,5 +447,5 @@ line-height: 400px;
 #text-box{
   text-align: center;
   vertical-align: middle;
-  line-height: 190px; 
+  line-height: 170px; 
 }
