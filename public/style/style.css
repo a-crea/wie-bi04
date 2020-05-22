@@ -417,7 +417,7 @@ line-height: 400px;
 }
 
 #timer{
-  padding-left: 10px;
+  padding-left: 40px;
 }
 
 
@@ -486,5 +486,9 @@ height: 705px;
   text-align: center;
   vertical-align: middle;
   line-height: 670px;
+}
+
+#timer{
+  padding-left: 0px;
 }
 }
