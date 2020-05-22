@@ -421,7 +421,7 @@ line-height: 400px;
 }
 
 
-.container {
+#container-participants {
   position: relative;
   background: lightgray;
 }
@@ -448,4 +448,43 @@ line-height: 400px;
   text-align: center;
   vertical-align: middle;
   line-height: 170px; 
+}
+
+@media only screen and (max-width: 600px) {
+  .box-yellow{
+  height: 100px;
+  width: 100px; 
+  position: absolute; 
+  bottom: 0cm;
+  text-align: center;
+}
+#text-box{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 95px; 
+  font-size: initial;
+}
+.box-blue{
+  top: 60px;
+  height: 100px;
+  width: 100px; 
+  position: absolute; 
+  right: 0cm;
+  text-align: center;
+  }
+#names-participants{
+    font-size: initial;
+  }
+
+#container-participants{
+height: 710px
+}
+#column-participant{
+height: 705px;
+}
+#names-participants{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 670px;
+}
 }
