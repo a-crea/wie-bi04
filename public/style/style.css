@@ -411,6 +411,8 @@ Users-manually
 
 #names-participants{
 text-align: center;
+vertical-align: middle;
+line-height: 400px;
 
 }
 
@@ -424,20 +426,26 @@ text-align: center;
   background: lightgray;
 }
 
-.box-orange {
-  position: fixed;
+.box-blue {
+  position: absolute;
   background: lightskyblue;
   width: 200px;
   height: 200px;
-  right: 5px;  
+  right: 0px;  
   text-align: center;  
 }
 
-.box-blue {
+.box-yellow {
   background: lightyellow;
   height: 200px;
   width: 200px; 
-  position: fixed; 
+  position: absolute; 
   bottom: 0cm;
   text-align: center;
+}
+
+#text-box{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 190px; 
 }
