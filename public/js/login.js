@@ -1,4 +1,4 @@
-/*
+
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
@@ -23,4 +23,3 @@ function login() {
             console.log(error);
         });
 } 
-*/

@@ -1,0 +1,10 @@
+roomsCreated[idRoom]:{
+    groupName: "",
+    // students pushed...
+    0:{
+        id:
+        name:
+        room:
+        state:
+    }
+}

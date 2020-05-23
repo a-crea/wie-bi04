@@ -77,6 +77,70 @@ border: none;
 color: #fff;
 }
 
+.custom-checkbox{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: absolute;
+    font-size: 18px;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #06dee1;
+    border-radius: 30%;
+    margin-left: 5px;
+    margin-top: 6px;
+}
+.custom-checkbox:hover{
+  cursor: pointer;
+  background-color: #1a9a9c;
+  background-clip: content-box;
+  padding:1.5px;
+}
+.custom-checkbox:focus{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline:none;
+  background-color: #fff;
+}
+
+.custom-checkbox:checked{
+  background-clip: content-box;
+  background-color: #06dee1;
+  padding:1.5px;
+}
+.custom-checkbox:disabled {
+  background: #dddddd;
+}
+
+.notification-badge{
+  background-color: #ccc;
+  width: 95%;
+  margin:auto;
+  display: inline-flex;
+  padding: 5px;
+  margin-top: 10px;
+  text-align: center;
+  color: #555;
+}
+
+.icons-notification{
+  width: auto;
+  font-size: 1.5em;
+  margin: auto;
+  height: auto;
+  display: inline-flex;
+}
+.icons-notification:hover{
+  cursor: pointer;
+}
+
+.accept-notification{
+  color:green;
+}
+.refuse-notification{
+  color:red;
+}
+
+
 @media only screen and (max-width: 600px) {
   #login {
     max-width: 300px;
@@ -216,23 +280,31 @@ Stylesheet of Random Groups
 */
 
 
-.groups-container{
+#groups-container{
   width: 100%;
   height: 80%;
   position: relative;
 }
-
-.groups-container > div{
+.single-group{
+  background-color: #d7d7d7;
+  border-radius: 1em;
+  width: 40%;
+  padding: 10px;
+  margin: 10px;
+  display: inline-block;
+}
+.single-group>div{
   background-image: url("../img/chat.png");
   background-position: left;
 	background-repeat:no-repeat;
-	background-size: 45%;
-  position: absolute;
-  width: 35%;
-  height: 40%;
+	background-size: contain;
+  position: relative;
+  /* max-width: 250px; */
+  /* height: 40%; */
   padding: 5px;
   text-align: right;
-  font-size: 2vw;
+  font-size: 1.2em;
+  /* font-size: 2vw; */
 }
 #rnd-group1{
   left: 5%;

@@ -1,39 +1,16 @@
-/*
-(function () {
-    'use strict';
-    window.addEventListener('load', function () {
-        var forms = document.getElementsByClassName('needs-validation');
-        var validation = Array.prototype.filter.call(forms, function (form) {
-            form.addEventListener('submit', function (event) {
-                if (form.checkValidity() === true) {
-                    addUser();
-                }
-                event.preventDefault();
-                form.classList.add('was-validated');
-            }, false);
-        });
-    }, false);
-})();
+
 var db = firebase.firestore();
 var profUid;
 var profUidSelected = null;
 var students = {};
-var studentsOld;
+var students;
 var professors = {};
+var notSaved = true;
 $(function () {
     $("#professors-list").change(function () {
-        profUidSelected = $("#professors-list option:selected").val();
-        console.log("here")
-        $("#students-list-selected").html("");
-        $("#sstudents-list-already-assigned").html("");
-        // console.log($("#professors-list option:selected").val());
-        // Object.keys(students).forEach(function (key) {
-        //   students[key].toSave = false;
-        // });
-        disableAlreadyAssigned();
-        if (profUidSelected != null) {
-            getListStudentsAlreadyAssignedForSelectedProf()
-        };
+            profUidSelected = $("#professors-list option:selected").val();
+            $("#students-list-assigned").html("");
+            getListStudentsAlreadyAssignedForSelectedProfLocal();
     });
 });
 firebase.auth().onAuthStateChanged(function (user) {
@@ -98,7 +75,6 @@ function getListStudents() {
                     assignedTo: null
                 };
             });
-            studentsOld = students;
             getListStudentsAlreadyAssigned();
         })
         .catch(function (error) {
@@ -106,8 +82,7 @@ function getListStudents() {
         });
 }
 function getListStudentsAlreadyAssigned() {
-    let data = [];
-    let arr, val;
+    let arr;
     db.collection("teaching").get()
         .then(function (querySnapshot) {
             querySnapshot.forEach(function (doc) {
@@ -115,7 +90,7 @@ function getListStudentsAlreadyAssigned() {
                     let idProf = doc.id;
                     arr = doc.data().students;
                     arr.forEach(id => {
-                        studentsOld[id].assignedTo = idProf;
+                        students[id].assignedTo = idProf;
                     });
                 }
             });
@@ -123,18 +98,14 @@ function getListStudentsAlreadyAssigned() {
         });
 }
 function getListStudentsAlreadyAssignedForSelectedProf() {
-    let studentsAlreadyAssignedContainer = $("#students-already-assigned-container");
-    let studentsAlreadyAssigned = $("#students-list-already-assigned");
+    let studentsAlreadyAssigned = $("#students-list-assigned");
     studentsAlreadyAssigned.html("")
     db.collection("teaching").doc(profUidSelected).get().then(function (doc) {
         if (Object.keys(doc.data()).length === 0 && doc.data().constructor === Object) {
-            studentsAlreadyAssignedContainer.hide();
         } else {
             let data = doc.data().students;
-            studentsAlreadyAssignedContainer.show();
             data.forEach(idStud => {
-                console.log(idStud)
-                studentsAlreadyAssigned.append('<p id="' + idStud + '">' + students[idStud].name + ' - ' + students[idStud].email + '<button class="btn btn-danger" onclick=deleteStudent("old","' + idStud + '")>Delete</button></p>');
+                studentsAlreadyAssigned.append('<p id="' + idStud + '">' + students[idStud].name + ' - ' + students[idStud].email + '<button class="btn btn-danger" onclick=deleteStudent("' + idStud + '")>Delete</button></p>');
                 $("#students-list>#" + idStud).attr('disabled', 'disabled');
                 students[idStud].toSave = true;
                 students[idStud].assignedTo = profUidSelected;
@@ -142,62 +113,73 @@ function getListStudentsAlreadyAssignedForSelectedProf() {
         }
     })
 }
+function getListStudentsAlreadyAssignedForSelectedProfLocal() {
+    let studentsAlreadyAssigned = $("#students-list-assigned");
+    studentsAlreadyAssigned.html("")
+    Object.keys(students).forEach(function (id) {
+        if (students[id].assignedTo == profUidSelected) {
+            studentsAlreadyAssigned.append('<p id="' + id + '">' + students[id].name + ' - ' + students[id].email + '<button class="btn btn-danger" onclick=deleteStudent("' + id + '")>Delete</button></p>');
+            $("#students-list>#" + id).attr('disabled', 'disabled');
+            students[id].toSave = true;
+            students[id].assignedTo = profUidSelected;
+        }
+    });
+}
+
 function addStudent(idStud) {
+    let val;
     let option = $("#students-list>#" + idStud);
-    let studentsSelected = $("#students-list-selected");
+    let studentsSelected = $("#students-list-assigned");
     option.attr('disabled', 'disabled');
-    studentsSelected.append('<p id="' + idStud + '">' + students[idStud].name + ' - ' + students[idStud].email + '<button class="btn btn-danger" onclick=deleteStudent("now","' + idStud + '")>Delete</button></p>');
+    studentsSelected.append('<p id="' + idStud + '">' + students[idStud].name + ' - ' + students[idStud].email + '<button class="btn btn-danger" onclick=deleteStudent("' + idStud + '")>Delete</button></p>');
     students[idStud].toSave = true;
     students[idStud].assignedTo = profUidSelected;
+    val = students[idStud].name + " - " + students[idStud].email;
+    val += " - Prof " + professors[profUidSelected].name;
+    $("#students-list>#" + idStud).text(val);
 }
-function deleteStudent(from, idStud) {
+function deleteStudent(idStud) {
     let option = $("#students-list>#" + idStud);
-    if (from == "now") {
-        console.log("NOW " + idStud);
-        $("#students-list-selected>#" + idStud).remove();
-    } else {
-        console.log("GIA " + idStud);
-        $("#students-list-already-assigned>#" + idStud).remove();
-    }
+    $("#students-list-assigned>#" + idStud).remove();
     option.removeAttr('disabled');
-    let val = option.text();
-    let index = val.lastIndexOf("Prof")
-    val = val.slice(0, index - 2)
-    option.text(val);
+    option.text(students[idStud].name + " - " + students[idStud].email);
     students[idStud].toSave = false;
     students[idStud].assignedTo = null;
 }
 
-function clearSelected() {
-    students = studentsOld;
-}
 function disableAlreadyAssigned() {
-    let idProf, index;
-    console.log(studentsOld)
-    Object.keys(studentsOld).forEach(function (id) {
-        if (studentsOld[id].assignedTo) {
-            idProf = studentsOld[id].assignedTo;
+    let idProf;
+    Object.keys(students).forEach(function (id) {
+        if (students[id].assignedTo) {
+            idProf = students[id].assignedTo;
             $("#students-list>#" + id).attr('disabled', 'disabled');
-            val = $("#students-list>#" + id).text();
-            index = val.lastIndexOf("Prof")
-            val = val.slice(0, index - 2)
+            val = students[id].name + " - " + students[id].email;
             val += " - Prof " + professors[idProf].name;
             $("#students-list>#" + id).text(val);
         }
     });
-
 }
 
 function save() {
     $("#save-button").hide();
     $("#saving-button").show();
 
-    let tempStud = students;
+    let tempStud = Object.assign({}, students);;
     let selectedStudentsToSave = [];
     let errorFound = false;
-    let updates;
+    let studentsUpdated = false;
     Object.keys(professors).forEach(function (keyProf) {
         Object.keys(students).forEach(function (keyStud) {
+            if (studentsUpdated==false){
+                db.collection("users").doc(keyStud).set({
+                    professor: students[keyStud].assignedTo,
+                }, { merge: true }).then(() => {
+
+                }).catch((error) => {
+                    errorFound = true;
+                    console.log(error);
+                });
+            }
             if (students[keyStud].assignedTo == keyProf) {
                 selectedStudentsToSave.push(keyStud);
                 delete students[keyStud];
@@ -214,7 +196,8 @@ function save() {
             });
         }
         selectedStudentsToSave = [];
-
+        studentsUpdated = true;
+     
     });
     if (errorFound === false) {
         launchModal("Success", "Students correctly assigned!");
@@ -224,8 +207,7 @@ function save() {
     errorFound = false;
     $("#save-button").show();
     $("#saving-button").hide();
-    studentsOld = students;
-
+    students = tempStud;
     disableAlreadyAssigned();
 }
 
@@ -235,4 +217,3 @@ function launchModal(label, body) {
     $('#modal-message').modal('toggle');
 } 
 
-*/

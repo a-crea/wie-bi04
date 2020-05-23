@@ -1,8 +1,8 @@
 TO DO
 - Error login failed
-
 //----------------------------------------------//
 DONE:
+- add prof id to users students
 - When signup is done the new user is directly signed-> FIX THIS -> functions| npm install -g firebase-tools
 - when prof signup add email as doc in teaching collection
 - use UID as ID of users - > ON CALL FUNCTIONS
