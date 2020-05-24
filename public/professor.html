@@ -21,8 +21,8 @@
           <span class="navbar-toggler-icon"></span>
         </button>
           <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Welcome, <span id="professor-name"></span></a></li>
-          <li><a href="index.html">Logout</a></li>
+          <li>Welcome, <span id="professor-name"></span></li>
+          <li><a onclick="signOut()" href="#">Logout</a></li>
           </ul>
   </nav>
   <div class="container-fluid">
@@ -49,6 +49,13 @@
       $("#main-container").load("components/professor/main.html");
       // $("#main-container").load("components/professor/users-randomly.html");
     });
+    function signOut() {
+      firebase.auth().signOut().then(function () {
+        window.location.replace(url + "/index.html");
+      }).catch(function (error) {
+        // An error happened.
+      });
+    }
   </script>
 </body>
 </html>

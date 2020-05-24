@@ -49,5 +49,66 @@
       </div>
     </div>
     </div>
+    <script src="/__/firebase/7.14.2/firebase-app.js"></script>
+    <script src="/__/firebase/7.14.2/firebase-auth.js"></script>
+    <script src="/__/firebase/7.14.2/firebase-firestore.js"></script>
+    <script src="/__/firebase/7.14.2/firebase-database.js"></script>
+    <script src="/__/firebase/7.14.2/firebase-functions.js"></script>
+    <script src="/__/firebase/init.js"></script>
   </body>
+  <script type="text/javascript">
+  var db = firebase.firestore();
+  var realTimeDb = firebase.database();
+  var idRoom = null;
+  var uid = null;
+  var prof = null;
+  firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        uid = user.uid;
+        var docRef = db.collection("users").doc(uid);
+        docRef.get().then(function (doc) {
+          if (doc.exists && doc.data().role=="student" && doc.data().professor) {
+            prof = doc.data().professor;
+            connectToRTDB();
+            // $("#professor-name").html(user.displayName);
+            // let alreadyInDb = null;
+            // realTimeDb.ref(prof).once('value', function (snapshot) {
+            //   // console.log(snapshot)
+            //   alreadyInDb = snapshot.val()
+            //   if (alreadyInDb && alreadyInDb.rooms) {
+            //     setRoomsCreated(alreadyInDb)
+            //     console.log(alreadyInDb)
+            //   } else {
+            //     getStudents();
+            //   }
+            // });
+          } else {
+            let url = window.location.origin;
+            window.location.replace(url + "/index.html");
+          }
+        }).catch(function (error) {
+          console.log("Error getting document:", error);
+        });
+      } else {
+        console.log("user not logged in");
+        let url = window.location.origin;
+        window.location.replace(url + "/index.html");
+      }
+    });
+
+  function connectToRTDB(){
+      var studentRealTime = realTimeDb.ref(prof + '/students/' + uid);
+      studentRealTime.on('value', function (snapshot) {
+        console.log(snapshot)
+        console.log(snapshot.val())
+      });
+  }
+  function signOut() {
+    firebase.auth().signOut().then(function () {
+      window.location.replace(url + "/index.html");
+    }).catch(function (error) {
+      // An error happened.
+    });
+  }
+  </script>
   </html>

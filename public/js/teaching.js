@@ -185,7 +185,6 @@ function save() {
                 delete students[keyStud];
             }
         });
-        if (selectedStudentsToSave.length > 0) {
             db.collection("teaching").doc(keyProf).set({
                 students: selectedStudentsToSave
             }).then(() => {
@@ -194,7 +193,6 @@ function save() {
                 errorFound = true;
                 console.log(error);
             });
-        }
         selectedStudentsToSave = [];
         studentsUpdated = true;
      
@@ -216,4 +214,3 @@ function launchModal(label, body) {
     $('#modal-body').html(body);
     $('#modal-message').modal('toggle');
 } 
-

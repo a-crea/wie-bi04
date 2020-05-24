@@ -12,6 +12,7 @@
 </div>
 <script type="text/javascript">
         var db = firebase.firestore();
+        var url = window.location.origin;
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var docRef = db.collection("teaching").doc(user.uid);
@@ -19,7 +20,6 @@
                     if (doc.exists) {
                         $("#professor-name").html(user.displayName);
                     } else {
-                        let url = window.location.origin;
                         window.location.replace(url + "/index.html");
                     }
                 }).catch(function (error) {
@@ -27,7 +27,6 @@
                 });
             } else {
                 console.log("user not logged in");
-                let url = window.location.origin;
                 window.location.replace(url + "/index.html");
             }
         });

@@ -65,7 +65,7 @@
       <h1 class="textDefault">Notifications</h1>
     </div>
     <div class="start-container">
-      <button type="button" class="btn btn-info btn-lg textDefault" id="set-timer-btn" data-toggle="modal" data-target="#myModal">Set timer</button>
+      <button type="button" class="btn btn-info btn-lg textDefault" id="set-timer-btn" data-toggle="modal" data-target="#myModal" disabled>Set timer</button>
     </div>
   </div>
 
@@ -114,7 +114,7 @@
       }
   });
   function setRoomsCreated(inRTDB) {
-    endTimeGlobal = inRTDB.endtime;
+    endTimeGlobal = new Date(inRTDB.endtime);
     let students = inRTDB.students;
     let rooms = inRTDB.rooms;
     for(idRoom in rooms){
@@ -161,6 +161,7 @@
     $(".start-container").css("display", "none");
     //add also notifications
     //start timer
+    $("#rooms-updates").css("display", "inline-block");
     realTimeReadRooms();
     realTimeReadStudents();
   }
@@ -222,6 +223,13 @@
       $("#create-group").attr("disabled", true);
     }
   }
+  function enableTimer(){
+    if (Object.keys(roomsCreated).length>0) {
+      $("#set-timer-btn").attr("disabled", false);
+    } else {
+      $("#set-timer-btn").attr("disabled", true);
+    }
+  }
   function createGroup() {
     let idRoom,node,head,update,temp,nRooms;
     idRoom = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
@@ -249,6 +257,7 @@
     $("#head-groups").html(head);
     groups = [];
     console.log(roomsCreated)
+    enableTimer();
     disableCheckboxes();
   }
 
@@ -275,7 +284,9 @@
     }
     $("#head-groups").html(head);
     $("#group"+idRoom).remove();
+    enableTimer();
   }
+
   function initiateRooms() {
     let minutes = $('#timer-select').val();
     fetch('https://worldtimeapi.org/api/timezone/Europe/Rome')
@@ -308,7 +319,6 @@
           $(".join-group").css("display", "inline-block");
           $(".remove-group").css("display", "none");
           $(".start-container").css("display","none");
-          $("#room-updates").css("display","inline-block");
           $("#stop-rooms").css("display","inline-block");
           $("#students-list-container").css("display","none");
           countdownInit();
@@ -334,20 +344,13 @@
       for(key in data){
         let room = data[key];
         console.log(room)
-        if(room.moreTime>0){
+        if(room.moreTime>0 && $("#not"+key+"time").length==0){
           console.log(room.moreTime)
           addNotification("time", key, room.moreTime);
-          room.moreTime = 0;
-          realTimeDb.ref(uidProf + '/rooms/' + key).update({
-            moreTime: 0
-          });
         }
-        if(room.needsHelp == true){
+        if(room.needsHelp == true && $("#not"+key+"help").length == 0){
           console.log(room.needsHelp)
           addNotification("help", key, null);
-          realTimeDb.ref(uidProf + '/rooms/' + key).update({
-            needsHelp: false
-          });
         }
       }
       console.log("-------------------")
@@ -371,10 +374,29 @@
 
   function handleNotification(accept, type, idRoom, time){
     if(accept==true && type == "time"){
+      console.log(roomsCreated)
+      // console.log(endTimeGlobal)
       endTimeGlobal = new Date(endTimeGlobal.getTime() + time * 60000)
       realTimeDb.ref(uidProf).update({
         endtime: endTimeGlobal.toString()
       });
+      for(key in roomsCreated){
+        if(key==idRoom && type == "help"){
+            realTimeDb.ref(uidProf + '/rooms/' + idRoom).update({
+              endtime: endTimeGlobal.toString(),
+              needsHelp: false
+            });
+        } else if (key == idRoom && type == "time") {
+          realTimeDb.ref(uidProf + '/rooms/' + idRoom).update({
+            endtime: endTimeGlobal.toString(),
+            moreTime: 0
+          });
+        } else {
+          realTimeDb.ref(uidProf + '/rooms/' + key).update({
+            endtime: endTimeGlobal.toString()
+          });
+        }
+      }
     } else if(accept == true && type == "help"){
       console.log("connect to room")
     }
@@ -401,33 +423,38 @@
             if (remainingTime < 0) {
               // clearInterval(countdown);
               $("#countdown-container").html("<p>FINISHED</p>")
-              removeRooms()
+              removeRooms(true)
             } 
           }, 1000); 
         }
       }).catch(function (err) {
         console.log('ERRORE ', err);
       })
+      $("#stop-rooms").css("display", "inline-block");
+      $("#rooms-updates").css("display", "inline-block");
   }
-
-  function removeRooms(){
-     clearInterval(countdown);
-     let head = 'ROOMS CREATED';
-     $("#head-groups").html(head);
-     for (let key in roomsCreated) {
+  
+  function removeRooms(fromCountdown){
+    clearInterval(countdown);
+    let head = 'ROOMS CREATED';
+    $("#head-groups").html(head);
+    for (let key in roomsCreated) {
       //   roomsCreated[key].forEach(student => {
       //     studentsInfo[student.id].room = null;
       //     $("#" + student.id).parent().css("display", "inline-block")
       //  });
-        $("#group" + key).remove();
-     }
-     $("#students-list").html("");
-     $("#students-list-container").css("display", "inline-block");
-     $(".start-container").css("display", "inline-block");
-     $("#rooms-updates").css("display", "none");
-     $("#stop-rooms").css("display", "none");
-     $("#countdown-container").css("display", "none");
-     clearAll()
+      $("#group" + key).remove();
+    }
+    $("#students-list").html("");
+    $("#students-list-container").css("display", "inline-block");
+    $(".start-container").css("display", "inline-block");
+    $("#rooms-updates").css("display", "none");
+    $("#stop-rooms").css("display", "none");
+    $("#countdown-container").css("display", "none");
+    clearAll();
+    if (fromCountdown === true) {
+      $("#main-container").load("components/professor/main.html");
+    }
   }
 
   function clearAll(){

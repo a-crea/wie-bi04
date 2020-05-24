@@ -2,6 +2,9 @@ TO DO
 - Error login failed
 //----------------------------------------------//
 DONE:
+- notification not showing when timer done
+- set timer not clickable
+- handlenotification if on prof, not handled, reload, disappear
 - add prof id to users students
 - When signup is done the new user is directly signed-> FIX THIS -> functions| npm install -g firebase-tools
 - when prof signup add email as doc in teaching collection
