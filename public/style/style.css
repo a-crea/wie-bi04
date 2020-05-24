@@ -498,7 +498,7 @@ line-height: 400px;
   background: lightgray;
 }
 
-.box-blue {
+#video-professor {
   position: absolute;
   background: lightskyblue;
   width: 180px;
@@ -507,7 +507,7 @@ line-height: 400px;
   text-align: center;  
 }
 
-.box-yellow {
+#video-me {
   background: lightyellow;
   height: 180px;
   width: 180px; 
@@ -523,7 +523,7 @@ line-height: 400px;
 }
 
 @media only screen and (max-width: 600px) {
-  .box-yellow{
+  #video-me{
   height: 100px;
   width: 100px; 
   position: absolute; 
@@ -536,7 +536,7 @@ line-height: 400px;
   line-height: 95px; 
   font-size: initial;
 }
-.box-blue{
+#video-professor{
   top: 60px;
   height: 100px;
   width: 100px; 
