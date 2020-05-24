@@ -468,7 +468,7 @@ Users-manually
 
 /* students-view */
 
-  #column-participant {
+  .column-participant {
     float: left;
     width: 50%;
     padding: 30px;
@@ -481,7 +481,7 @@ Users-manually
     clear: both;
 }
 
-#names-participants{
+.names-participants{
 text-align: center;
 vertical-align: middle;
 line-height: 400px;
@@ -516,7 +516,7 @@ line-height: 400px;
   text-align: center;
 }
 
-#text-box{
+.text-box{
   text-align: center;
   vertical-align: middle;
   line-height: 170px; 
@@ -530,7 +530,7 @@ line-height: 400px;
   bottom: 0cm;
   text-align: center;
 }
-#text-box{
+.text-box{
   text-align: center;
   vertical-align: middle;
   line-height: 95px; 
@@ -544,17 +544,17 @@ line-height: 400px;
   right: 0cm;
   text-align: center;
   }
-#names-participants{
+.names-participants{
     font-size: initial;
   }
 
 #container-participants{
 height: 710px
 }
-#column-participant{
+.column-participant{
 height: 705px;
 }
-#names-participants{
+.names-participants{
   text-align: center;
   vertical-align: middle;
   line-height: 670px;
