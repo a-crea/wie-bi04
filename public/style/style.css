@@ -571,8 +571,8 @@ width: 100%;
 @media only screen and (min-height : 812px)  
 and (max-height : 825px) {
   #video-me{
-    height: 110px;
-    width: 187px; 
+    height: 115px;
+    width: 186px; 
     position: absolute; 
     right: 0;
     text-align: center;
@@ -584,10 +584,10 @@ and (max-height : 825px) {
     font-size: initial;
   }
   #video-professor{
-    height: 110px;
-    width: 187px; 
+    height: 115px;
+    width: 186px; 
     position: absolute; 
-    right: 188px;
+    right: 190px;
     text-align: center;
     }
   .names-participants{
