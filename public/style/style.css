@@ -468,7 +468,7 @@ Users-manually
 
 /* students-view */
 
-  #column-participant {
+  .column-participant {
     float: left;
     width: 50%;
     padding: 30px;
@@ -481,7 +481,7 @@ Users-manually
     clear: both;
 }
 
-#names-participants{
+.names-participants{
 text-align: center;
 vertical-align: middle;
 line-height: 400px;
@@ -498,7 +498,7 @@ line-height: 400px;
   background: lightgray;
 }
 
-.box-blue {
+#video-professor {
   position: absolute;
   background: lightskyblue;
   width: 180px;
@@ -507,7 +507,7 @@ line-height: 400px;
   text-align: center;  
 }
 
-.box-yellow {
+#video-me {
   background: lightyellow;
   height: 180px;
   width: 180px; 
@@ -516,27 +516,27 @@ line-height: 400px;
   text-align: center;
 }
 
-#text-box{
+.text-box{
   text-align: center;
   vertical-align: middle;
   line-height: 170px; 
 }
 
 @media only screen and (max-width: 600px) {
-  .box-yellow{
+  #video-me{
   height: 100px;
   width: 100px; 
   position: absolute; 
   bottom: 0cm;
   text-align: center;
 }
-#text-box{
+.text-box{
   text-align: center;
   vertical-align: middle;
   line-height: 95px; 
   font-size: initial;
 }
-.box-blue{
+#video-professor{
   top: 60px;
   height: 100px;
   width: 100px; 
@@ -544,17 +544,17 @@ line-height: 400px;
   right: 0cm;
   text-align: center;
   }
-#names-participants{
+.names-participants{
     font-size: initial;
   }
 
 #container-participants{
 height: 710px
 }
-#column-participant{
+.column-participant{
 height: 705px;
 }
-#names-participants{
+.names-participants{
   text-align: center;
   vertical-align: middle;
   line-height: 670px;
