@@ -522,42 +522,43 @@ line-height: 400px;
   line-height: 170px; 
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 790px) {
   #video-me{
-  height: 100px;
-  width: 100px; 
+  height: 70px;
+  width: 70px; 
   position: absolute; 
-  bottom: 0cm;
+  bottom: 203px;
   text-align: center;
 }
 .text-box{
   text-align: center;
   vertical-align: middle;
-  line-height: 95px; 
+  line-height: 68px; 
   font-size: initial;
 }
 #video-professor{
-  top: 60px;
-  height: 100px;
-  width: 100px; 
+  height: 70px;
+  width: 70px; 
   position: absolute; 
   right: 0cm;
   text-align: center;
   }
 .names-participants{
-    font-size: initial;
+  font-size: initial;
   }
 
 #container-participants{
-height: 710px
+height: 470px;
+padding-top: 57px;
 }
 .column-participant{
-height: 705px;
+height: 210px;
+width: 100%;
 }
 .names-participants{
   text-align: center;
   vertical-align: middle;
-  line-height: 670px;
+  line-height: 150px;
 }
 
 #timer{
