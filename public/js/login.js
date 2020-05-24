@@ -1,4 +1,4 @@
-
+var db = firebase.firestore();
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
@@ -7,8 +7,15 @@ firebase.auth().onAuthStateChanged(function (user) {
                 // session only. Closing the window would clear any existing state even if
                 // a user forgets to sign out.
             });
-        let url = window.location.origin;
-        window.location.replace(url + "/professor.html"); //redirect regarding user type (prof or student)
+        var userRef = db.collection("users").doc(user.uid);
+        userRef.get().then(function (doc) {
+            let url = window.location.origin;
+            if (doc.data().role == "professor") {
+                window.location.replace(url + "/professor.html"); //redirect regarding user type (prof or student)
+            } else {
+                window.location.replace(url + "/students-view.html"); //redirect regarding user type (prof or student)
+            }
+        });
     } else {
         console.log("user not logged in");
     }
@@ -22,4 +29,11 @@ function login() {
         }).catch(function (error) {
             console.log(error);
         });
-} 
+}
+$(function () {
+    $("input").keypress(function (event) {
+        if (event.keyCode === 13) {
+            $("#btn-login").click();
+        }
+    }); 
+});
