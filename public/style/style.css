@@ -522,12 +522,14 @@ line-height: 400px;
   line-height: 170px; 
 }
 
-@media only screen and (max-width: 790px) {
+@media only screen and (min-device-width : 375px)  
+and (max-device-width : 704px) {
+ 
   #video-me{
   height: 70px;
   width: 70px; 
   position: absolute; 
-  bottom: 203px;
+  bottom: 184px;
   text-align: center;
 }
 .text-box{
@@ -552,7 +554,7 @@ height: 470px;
 padding-top: 57px;
 }
 .column-participant{
-height: 210px;
+height: 230px;
 width: 100%;
 }
 .names-participants{
@@ -564,4 +566,188 @@ width: 100%;
 #timer{
   padding-left: 0px;
 }
+}
+
+@media only screen and (min-height : 812px)  
+and (max-height : 825px) {
+  #video-me{
+    height: 70px;
+    width: 70px; 
+    position: absolute; 
+    bottom: 123px;
+    text-align: center;
+  }
+  .text-box{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 68px; 
+    font-size: initial;
+  }
+  #video-professor{
+    height: 70px;
+    width: 70px; 
+    position: absolute; 
+    right: 0cm;
+    text-align: center;
+    }
+  .names-participants{
+    font-size: initial;
+    }
+  
+  #container-participants{
+  height: 470px;
+  padding-top: 57px;
+  }
+  .column-participant{
+  height: 290px;
+  width: 100%;
+  }
+  .names-participants{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 230px;
+  }
+  
+  #timer{
+    padding-left: 0px;
+  }
+  }
+  
+
+@media only screen and (min-device-width : 320px)  /*iphone 5 */
+and (max-device-width : 374px) {
+  #video-me{
+  height: 70px;
+  width: 70px; 
+  position: absolute; 
+  bottom: -117px;
+  text-align: center;
+}
+.text-box{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 68px; 
+  font-size: initial;
+}
+#video-professor{
+  height: 70px;
+  width: 70px; 
+  position: absolute; 
+  right: 0cm;
+  text-align: center;
+  }
+.names-participants{
+  font-size: initial;
+  text-align: center;
+  }
+
+#container-participants{
+height: 300px;
+padding-top: 59px;
+}
+.column-participant{
+height: 180px;
+width: 100%;
+}
+.names-participants{
+  text-align: center;
+  vertical-align: middle;
+  line-height: 120px;
+}
+
+#timer{
+  padding-left: 0px;
+}
+}
+
+@media only screen /* ipad modus */
+and (min-device-width : 705px) 
+and (max-device-width : 880px) {
+  #video-me{
+    height: 105px;
+    width: 105px; 
+    position: absolute; 
+    bottom: 13px;
+    text-align: center;
+  }
+  .text-box{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 100px; 
+    font-size: initial;
+  }
+  #video-professor{
+    height: 105px;
+    width: 105px; 
+    position: absolute; 
+    right: 0cm;
+    text-align: center;
+    }
+  .names-participants{
+    font-size: initial;
+    }
+  
+  #container-participants{
+  height: 470px;
+  padding-top: 57px;
+  }
+  .column-participant{
+  height: 400px;
+  width: 100%;
+  }
+  .names-participants{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 350px;
+  }
+  
+  #timer{
+    padding-left: 0px;
+  }
+}
+
+
+@media only screen /* ipad pro modus */
+and (min-device-width : 880px) 
+and (max-device-width : 1200px) {
+  #video-me{
+    height: 140px;
+    width: 140px; 
+    position: absolute; 
+    bottom: -130px;
+    text-align: center;
+  }
+  .text-box{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 130px; 
+    font-size: initial;
+  }
+  #video-professor{
+    height: 140px;
+    width: 140px; 
+    position: absolute; 
+    right: 0cm;
+    text-align: center;
+    }
+  .names-participants{
+    font-size: initial;
+    }
+  
+  #container-participants{
+  height: 470px;
+  }
+  .column-participant{
+  height: 600px;
+  width: 100%;
+  }
+  .names-participants{
+    text-align: center;
+    vertical-align: middle;
+    line-height: 540px;
+  }
+  
+  #timer{
+    padding-left: 0px;
+  }
 }
