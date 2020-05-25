@@ -7,7 +7,9 @@
    <meta name="description" content="wie-bi04-project">
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-   <title>Video room</title>
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
+
+     <title>Video room</title>
    <link rel="stylesheet" a href="style/style.css">
 </head>
 <nav class="navbar fixed-top navbar-default">    
@@ -34,81 +36,42 @@
     </nav>
 <body id = "dashboard-body">
   <div class="container-fluid" id="container-participants">
-      <div class="row" id = "row-participant">
+    <div class="row" id = "row-participant" style="display: none;">
       <div class="column-participant" style="background-color:#aaa;">
          <h2 class="names-participants">Vera Belingheri</h2>
        </div>
-       <div class="column-participant" style="background-color:#bbb;">
-         <h2 class="names-participants">Gianluca Verdi</h2>
-       </div>
-      <div id="video-professor">
-         <h2 class="text-box">Professor</h2>
-      </div>
-      <div id="video-me">
-         <h2 class="text-box">Me</h2>
-      </div>
+        <div class="column-participant" style="background-color:#bbb;">
+          <h2 class="names-participants">Gianluca Verdi</h2>
+        </div>
+        <div id="video-professor">
+          <h2 class="text-box">Professor</h2>
+        </div>
+        <div id="video-me">
+          <h2 class="text-box">Me</h2>
+        </div>
     </div>
-    </div>
+    <div id="videos-container" style="margin-top:100px;"></div>
+  </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="/__/firebase/7.14.2/firebase-app.js"></script>
     <script src="/__/firebase/7.14.2/firebase-auth.js"></script>
     <script src="/__/firebase/7.14.2/firebase-firestore.js"></script>
     <script src="/__/firebase/7.14.2/firebase-database.js"></script>
     <script src="/__/firebase/7.14.2/firebase-functions.js"></script>
     <script src="/__/firebase/init.js"></script>
+      <script src="js/RTCMultiConnection.min.js"></script>
+      <script src="js/rtc-adapter.js"></script>
+      <script src="js/socket.io.js"></script>
+      <script src="https://cdn.plyr.io/3.6.2/plyr.polyfilled.js"></script>
+      <!-- <script src="js/getHTMLMediaElement.js"></script> -->  
+      <script src="js/room.js"></script>
   </body>
   <script type="text/javascript">
-  var db = firebase.firestore();
-  var realTimeDb = firebase.database();
-  var idRoom = null;
-  var uid = null;
-  var prof = null;
-  firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        uid = user.uid;
-        var docRef = db.collection("users").doc(uid);
-        docRef.get().then(function (doc) {
-          if (doc.exists && doc.data().role=="student" && doc.data().professor) {
-            prof = doc.data().professor;
-            connectToRTDB();
-            // $("#professor-name").html(user.displayName);
-            // let alreadyInDb = null;
-            // realTimeDb.ref(prof).once('value', function (snapshot) {
-            //   // console.log(snapshot)
-            //   alreadyInDb = snapshot.val()
-            //   if (alreadyInDb && alreadyInDb.rooms) {
-            //     setRoomsCreated(alreadyInDb)
-            //     console.log(alreadyInDb)
-            //   } else {
-            //     getStudents();
-            //   }
-            // });
-          } else {
-            let url = window.location.origin;
-            window.location.replace(url + "/index.html");
-          }
-        }).catch(function (error) {
-          console.log("Error getting document:", error);
-        });
-      } else {
-        console.log("user not logged in");
-        let url = window.location.origin;
-        window.location.replace(url + "/index.html");
-      }
-    });
 
-  function connectToRTDB(){
-      var studentRealTime = realTimeDb.ref(prof + '/students/' + uid);
-      studentRealTime.on('value', function (snapshot) {
-        console.log(snapshot)
-        console.log(snapshot.val())
-      });
-  }
-  function signOut() {
-    firebase.auth().signOut().then(function () {
-      window.location.replace(url + "/index.html");
-    }).catch(function (error) {
-      // An error happened.
-    });
-  }
   </script>
   </html>
