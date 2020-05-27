@@ -1,6 +1,8 @@
 TO DO
 - Error login failed
 - Load rooms on professor loading, not match manually
+- In rooms on connection out or page leave, delete div id
+- on rooms end delete everything and load old loading screen
 //----------------------------------------------//
 DONE:
 - notification not showing when timer done

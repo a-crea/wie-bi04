@@ -467,6 +467,21 @@ Users-manually
 
 
 /* students-view */
+#videos-remote-container{
+}
+
+.video-local-container{
+ margin:auto;
+}
+.video-local{
+  width:20%;
+}
+.video-remote-container{
+ margin:auto;
+}
+.video-remote{
+  width:100%;
+}
 
   .column-participant {
     float: left;

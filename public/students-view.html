@@ -10,48 +10,48 @@
      <title>Video room</title>
    <link rel="stylesheet" a href="style/style.css">
 </head>
-<nav class="navbar fixed-top navbar-default">    
-   <div class="col-sm-9">  
-       <div id="timer" style="color:white;">
-         <H4>TIMER</H4>
-         <h4>00:00</h4>
-       </div>
-     </div>
-     <div id="timer" style="color:white;">
-      <h5>Request more time</h5>
-     <div class="input-group">
-      <select class="custom-select" id="inputGroupSelect04">
-        <option selected>Select minutes</option>
-        <option value="1">2 minutes</option>
-        <option value="2">5 minutes</option>
-        <option value="3">10 minutes</option>
-      </select>
-      <div class="input-group-append" id="confirm-button">
-        <button class="btn btn-primary btn-sm" type="button">Confirm</button>
-      </div>
-    </div>
-     </div>
-    </nav>
+
 <body id="dashboard-body">
-  <div class="col-sm-10">
-  <div class="container-fluid" id="container-participants">
-    <div class="row" id = "row-participant" style="display: none;">
-      <div class="column-participant" style="background-color:#aaa;">
-         <h2 class="names-participants">Vera Belingheri</h2>
-       </div>
-       <div class="column-participant" style="background-color:#bbb;">
-         <h2 class="names-participants">Gianluca Verdi</h2>
-       </div>
-      </div>
-      
-      <div id="video-professor">
-         <h2 class="text-box">Professor</h2>
-      </div>
-      <div id="video-me">
-         <h2 class="text-box">Me</h2>
+  <nav class="navbar fixed-top navbar-default">
+    <div class="col-sm-9">
+      <div id="timer" style="color:white;">
+        <H4>TIMER</H4>
+        <h4>00:00</h4>
       </div>
     </div>
-    <div id="videos-container" style="margin-top:100px;"></div>
+    <div id="timer" style="color:white;">
+      <h5>Request more time</h5>
+      <div class="input-group">
+        <select class="custom-select" id="inputGroupSelect04">
+          <option selected>Select minutes</option>
+          <option value="1">2 minutes</option>
+          <option value="2">5 minutes</option>
+          <option value="3">10 minutes</option>
+        </select>
+        <div class="input-group-append" id="confirm-button">
+          <button class="btn btn-primary btn-sm" type="button">Confirm</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+  <div class="container-fluid">
+  <div class="col-sm-10">
+    <div class="row" id="videos-remote-container">
+    </div>
+      <div class="row">
+      <div id="video-professor-ale" style="display: none;">
+        <h2 class="text-box">Professor</h2>
+      </div>
+      <div id="video-me-ale">
+        <!-- <h2 class="text-box">Me</h2> -->
+      </div>
+      </div>
+
+    </div>
+    <div class="col-sm-2">
+
+    </div>
+
   </div>
 </body>
 

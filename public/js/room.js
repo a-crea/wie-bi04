@@ -1,3 +1,4 @@
+/*
 $(function () {
     var db = firebase.firestore();
     var realTimeDb = firebase.database();
@@ -104,20 +105,29 @@ $(function () {
         ]
     }];
 
-    connection.videosContainer = document.getElementById('videos-container');
     connection.onstream = function (event) {
+        let classVideo, classVideoContainer;
+        var video = document.createElement('video');
+        var div = document.createElement('div');
         event.mediaElement.removeAttribute('src');
         event.mediaElement.removeAttribute('srcObject');
-        var video = document.createElement('video');
-        video.classList.add("js-player");
-        video.setAttribute("id", uid);
-        video.controls = true;
         if (event.type === 'local') {
+            connection.videosContainer = document.getElementById('video-me-ale');
             video.muted = true;
+            classVideo = 'video-local';
+            classVideoContainer = 'video-local-container';
+        } else {
+            connection.videosContainer = document.getElementById('videos-remote-container');
+            classVideo = 'video-remote';
+            classVideoContainer = 'video-remote-container';
         }
+        video.controls = true;
+        video.classList.add(classVideo);
+        div.setAttribute('id', uid);
+        div.classList.add(classVideoContainer);
         video.srcObject = event.stream;
-        
-        connection.videosContainer.append(video);
+        div.append(video);
+        connection.videosContainer.append(div);
     
         setTimeout(function () {
             video.play();
@@ -126,3 +136,4 @@ $(function () {
         // mediaElement.id = event.streamid;
     };
 });
+*/
