@@ -1,4 +1,4 @@
-/*
+
 var db = firebase.firestore();
 var profUid;
 var profUidSelected = null;
@@ -214,4 +214,3 @@ function launchModal(label, body) {
     $('#modal-body').html(body);
     $('#modal-message').modal('toggle');
 } 
-*/

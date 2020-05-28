@@ -41,6 +41,8 @@
       <div id="list">
         <ul id="students-list" role="listbox" tabindex="0" class="list-group">
         </ul>
+      </div>
+      <div class="text-center">
         <button id="create-group" class="btn btn-primary" onclick="createGroup()" disabled>Create group</button>
       </div>
     </div>
@@ -57,7 +59,7 @@
             </div>
         </div>
         <button id="stop-rooms" class="btn btn-danger" onclick="removeRooms()" style="display: none;">Stop rooms</button>
-    </div>
+      </div>
   </div>
 
   <div class="col-sm-2">
@@ -98,6 +100,9 @@
                     setRoomsCreated(alreadyInDb)
                     console.log(alreadyInDb)
                   } else {
+                    realTimeDb.ref(uidProf).set({
+                      mode: "manually"
+                    })
                     getStudents();
                   }
                 });
@@ -163,6 +168,7 @@
     //add also notifications
     //start timer
     $("#rooms-updates").css("display", "inline-block");
+    enableCreateGroup();
     realTimeReadRooms();
     realTimeReadStudents();
   }
@@ -258,6 +264,7 @@
     $("#head-groups").html(head);
     groups = [];
     console.log(roomsCreated)
+    enableCreateGroup()
     enableTimer();
     disableCheckboxes();
   }
@@ -375,19 +382,12 @@
 
   function handleNotification(accept, type, idRoom, time){
     if(accept==true && type == "time"){
-      console.log(roomsCreated)
-      // console.log(endTimeGlobal)
       endTimeGlobal = new Date(endTimeGlobal.getTime() + time * 60000)
       realTimeDb.ref(uidProf).update({
         endtime: endTimeGlobal.toString()
       });
       for(key in roomsCreated){
-        if(key==idRoom && type == "help"){
-            realTimeDb.ref(uidProf + '/rooms/' + idRoom).update({
-              endtime: endTimeGlobal.toString(),
-              needsHelp: false
-            });
-        } else if (key == idRoom && type == "time") {
+        if (key == idRoom) {
           realTimeDb.ref(uidProf + '/rooms/' + idRoom).update({
             endtime: endTimeGlobal.toString(),
             moreTime: 0
@@ -399,8 +399,20 @@
         }
       }
     } else if(accept == true && type == "help"){
+        realTimeDb.ref(uidProf + '/rooms/' + idRoom).update({
+          needsHelp: false
+        });
       console.log("connect to room")
+    } else if(accept == false && type == "time"){
+      realTimeDb.ref(uidProf + '/rooms/' + idRoom).update({
+        moreTime: 0
+      });
+    } else if(accept == false && type == "help"){
+      realTimeDb.ref(uidProf + '/rooms/' + idRoom).update({
+        needsHelp: false
+      });
     }
+ 
     $("#not"+idRoom+type).remove();
   }
 
@@ -448,7 +460,7 @@
     }
     $("#students-list").html("");
     $("#students-list-container").css("display", "inline-block");
-    $(".start-container").css("display", "inline-block");
+    $(".start-container").css("display", "inline-block")
     $("#rooms-updates").css("display", "none");
     $("#stop-rooms").css("display", "none");
     $("#countdown-container").css("display", "none");
@@ -466,6 +478,8 @@
     remainingTime = null;
     countdown = null;
     groups = [];
+    $('#rooms-updates').html('<h1 class="textDefault">Notifications</h1>');
+    enableTimer();
     getStudents();
   }
   */

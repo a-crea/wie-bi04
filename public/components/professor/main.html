@@ -11,14 +11,23 @@
     </div>
 </div>
 <script type="text/javascript">
-/*
+        /*
         var db = firebase.firestore();
+        var realTimeDb = firebase.database();
         var url = window.location.origin;
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
                 var docRef = db.collection("teaching").doc(user.uid);
                 docRef.get().then(function (doc) {
                     if (doc.exists) {
+                       realTimeDb.ref(user.uid).once('value', function (snapshot) {
+                            let alreadyInDb = snapshot.val()
+                            if (alreadyInDb && alreadyInDb.rooms && alreadyInDb.mode=="manually") {
+                                matchManually()
+                            } else if (alreadyInDb && alreadyInDb.rooms && alreadyInDb.mode == "randomly"){
+                                console.log("it was randomly")
+                            }
+                        });
                         $("#professor-name").html(user.displayName);
                     } else {
                         window.location.replace(url + "/index.html");

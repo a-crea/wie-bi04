@@ -1,10 +1,16 @@
 TO DO
 - Error login failed
-- Load rooms on professor loading, not match manually
-- In rooms on connection out or page leave, delete div id
-- on rooms end delete everything and load old loading screen
+- add disclaimer: chat messages not saved
+- jump in room prof
+- screen sharing
+- random match
+- sometimes remain on waiting room
 //----------------------------------------------//
 DONE:
+- Load rooms on professor loading, not match manually
+- handle dismiss notification in RTDB
+- on rooms end delete everything and load old loading screen
+- In rooms on connection out or page leave, delete div id
 - notification not showing when timer done
 - set timer not clickable
 - handlenotification if on prof, not handled, reload, disappear

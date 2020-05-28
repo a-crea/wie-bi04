@@ -18,8 +18,8 @@
 #list{
   background-color: #0b0c22;
   width: 100%;
-  height: 430px;
-  overflow-y: scroll;
+  max-height: 430px;
+  overflow-y: auto;
   scroll-behavior: smooth;
   display: inline-block;
   justify-content: center;
@@ -467,7 +467,99 @@ Users-manually
 
 
 /* students-view */
+
+#video-placeholder{
+  height:500px;
+  width: 100%;
+}
+.room-active{
+  display: none;
+}
+
+.chat-container{
+  height: 90%;
+  max-height: 700px;
+  overflow:auto;
+}
+
+.chat-input{
+    width: 90%;
+    border: none;
+    background: #1f2149;
+    color: #fff;
+    /* font-size: 10px; */
+    padding: 5px 10px;
+}
+
+.chat-input:focus{
+  background: #1f2149;
+  color: #fff;
+  box-shadow:none;
+}
+
+.message-container{
+  width: 100%;
+  display: block;
+  padding:5px;
+}
+.message-container.me{
+  text-align: right;
+}
+
+.chat-message{
+    background: #383b78;
+    color: #fff;
+    font-size:0.9rem;
+    display: inline-block;
+    padding: 5px 10px;
+}
+.chat-message-me{
+    background: #1f2149;
+    color: #fff;
+    font-size:0.9rem;
+    display: inline-block;
+    padding: 5px 10px;
+}
+.chat-message-me>span{
+  display: block;
+  font-size:0.7rem;
+  color:#ccc;
+}
+.chat-message>span{
+  display: block;
+  font-size:0.7rem;
+  color:#ccc;
+}
+
+#btn-send{
+  background: #1f2149;
+  border: none;
+}
+#btn-send:hover{
+  background: #5a5fcc;
+  border:none;
+}
+#btn-send:hover>i{
+  color:#fff;
+}
+#btn-send:disabled,
+#btn-send[disabled]{
+  border: none;
+  background-color: #1f2149;
+}
+#btn-send:disabled,
+#btn-send[disabled]>i{
+  color: #464646;
+}
+
 #videos-remote-container{
+}
+
+.name-in-video{
+  position: absolute;
+  padding: 10px 20px;
+  color: white;
+  text-shadow: 1px 1px 3px #000;
 }
 
 .video-local-container{
@@ -477,7 +569,8 @@ Users-manually
   width:20%;
 }
 .video-remote-container{
- margin:auto;
+  margin-top:100px !important;
+  margin:auto;
 }
 .video-remote{
   width:100%;

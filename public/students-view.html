@@ -7,49 +7,99 @@
    <meta name="description" content="wie-bi04-project">
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <link href="style/fontawesome/css/all.css" rel="stylesheet">
      <title>Video room</title>
    <link rel="stylesheet" a href="style/style.css">
 </head>
 
 <body id="dashboard-body">
   <nav class="navbar fixed-top navbar-default">
-    <div class="col-sm-9">
+    <div class="col-sm-9 room-active">
       <div id="timer" style="color:white;">
         <H4>TIMER</H4>
-        <h4>00:00</h4>
+        <h4 id="time">--:--</h4>
       </div>
     </div>
-    <div id="timer" style="color:white;">
+    <div class="room-active" id="timer" style="color:white;">
       <h5>Request more time</h5>
       <div class="input-group">
-        <select class="custom-select" id="inputGroupSelect04">
-          <option selected>Select minutes</option>
-          <option value="1">2 minutes</option>
-          <option value="2">5 minutes</option>
-          <option value="3">10 minutes</option>
+        <select class="custom-select" id="more-time-select">
+          <option value="0" selected>Select minutes</option>
+          <option value="2">2 minutes</option>
+          <option value="5">5 minutes</option>
+          <option value="10">10 minutes</option>
         </select>
-        <div class="input-group-append" id="confirm-button">
-          <button class="btn btn-primary btn-sm" type="button">Confirm</button>
+        <div class="input-group-append">
+          <button id="request-time-btn" class="btn btn-primary btn-sm" type="button">Confirm</button>
         </div>
       </div>
     </div>
   </nav>
   <div class="container-fluid">
-  <div class="col-sm-10">
-    <div class="row" id="videos-remote-container">
+    <div class="row h-100" id="room-waiting">
+      <div class="col-sm-12 my-auto">
+        <h2 class="textDefault"> Waiting for the room</h2>
+        <div class="text-center">
+          <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-info" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-light" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div>
+      </div>
     </div>
-      <div class="row">
-      <div id="video-professor-ale" style="display: none;">
-        <h2 class="text-box">Professor</h2>
-      </div>
-      <div id="video-me-ale">
-        <!-- <h2 class="text-box">Me</h2> -->
-      </div>
-      </div>
+    <div class="row room-active">
+      <div class="col-sm-10">
+        <div class="row" id="videos-remote-container">
+          <div id="video-placeholder" class="row text-center">
+            <div class="col my-auto">
+              <h3 class="textDefault">Waiting...</h3>
+            <div class="spinner-border text-light" role="status">
+              <span class="sr-only">Waiting for connection...</span>
+            </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div id="video-professor-ale" style="display: none;">
+            <h2 class="text-box">Professor</h2>
+          </div>
+          <div id="video-me-ale">
+            <!-- <h2 class="text-box">Me</h2> -->
+          </div>
+        </div>
 
-    </div>
-    <div class="col-sm-2">
-
+      </div>
+      <div class="col-sm-2">
+        <div class="chat-container">
+        </div>
+        <div class="input-group">
+          <input type="text" class="form-control chat-input" placeholder="Message..." aria-label="Message..."
+            aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button id="btn-send" class="btn btn-outline-secondary" type="button" disabled><i class="fas fa-paper-plane"></i></button>
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -67,9 +117,10 @@
     <script src="/__/firebase/7.14.2/firebase-database.js"></script>
     <script src="/__/firebase/7.14.2/firebase-functions.js"></script>
     <script src="/__/firebase/init.js"></script>
-      <script src="js/RTCMultiConnection.min.js"></script>
-      <script src="js/rtc-adapter.js"></script>
-      <script src="js/socket.io.js"></script>
+    <script src="js/FileBufferReader.js"></script>
+    <script src="js/rtc-adapter.js"></script>
+    <script src="js/socket.io.js"></script>
+    <script src="js/RTCMultiConnection.min.js"></script>
       <!-- <script src="js/getHTMLMediaElement.js"></script> -->  
       <script src="js/room.js"></script>
   </body>
