@@ -1,12 +1,12 @@
 TO DO
 - Error login failed
 - add disclaimer: chat messages not saved
-- jump in room prof
 - screen sharing
-- random match
-- sometimes remain on waiting room
 //----------------------------------------------//
 DONE:
+- jump in room prof
+- sometimes remain on waiting room
+- random match
 - Load rooms on professor loading, not match manually
 - handle dismiss notification in RTDB
 - on rooms end delete everything and load old loading screen

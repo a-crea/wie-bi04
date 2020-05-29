@@ -72,7 +72,7 @@
 
 </div>
 <script type="text/javascript">
-/*
+
   var uidProf = null;
   var studentsInfo = {};
   var students = null;
@@ -160,8 +160,6 @@
       $("#groups-container").append(node);
     }
     nRooms = Object.keys(roomsCreated).length;
-    // roomsCreated[idRoom].groupName = "Group " + nRooms;
-    // $("#group" + idRoom + ">p").html("Group " + nRooms);
     if (nRooms > 1) {
       head = 'YOU HAVE CREATED ' + nRooms + ' ROOMS';
     } else {
@@ -188,7 +186,7 @@
         name = user.data().name;
         node = '<li tabindex="-1" role="option" aria-checked="false" class="list-group-item">' + name;
         node += '<input id="' + id + '" class="custom-checkbox" value="' + id + '" tabindex="-1" type="checkbox" onclick="addToArrGroups(\'' + id + '\')"></li>';
-        $("#students-list").append(node);
+        // $("#students-list").append(node);
         studentsInfo[id] = {
           state: 'away',
           name: user.data().name,
@@ -199,8 +197,12 @@
           name: user.data().name,
           room: null,
         });
-        position ++;
       })
+      console.log(position)
+      position++;
+      if (position == students.length) {
+        setTimeout(createGroup, 1000);
+      }
     });
     realTimeReadStudents();
   }
@@ -244,32 +246,70 @@
       $("#set-timer-btn").attr("disabled", true);
     }
   }
+  function shuffle(array) {
+    array.sort(() => Math.random() - 0.5);
+  }
+
   function createGroup() {
-    let idRoom,node,head,update,temp,nRooms;
+    let idRoom,node,head,update,temp,nRooms,count,tempId,tempId2;
+    count=0;
+    let nStud = Object.keys(students).length
+    console.log(nStud)
     idRoom = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
-    node = '<div id="group'+idRoom+'" class="single-group"><p class="head-single-group"></p><div>';
     roomsCreated[idRoom] = [];
-    groups.forEach(id => {
-      $("#" + id).prop("checked", false);
-      temp = studentsInfo[id];
-      temp.id=id;
+    shuffle(students);
+    while(count<nStud){
+      if (count == students.length - 1 && nStud%2 == 1) {
+        break;
+      }
+      node = '<div id="group'+idRoom+'" class="single-group"><p class="head-single-group"></p><div>';
+      tempId = students[count];
+      temp = studentsInfo[tempId];
+      temp.id = tempId;
       roomsCreated[idRoom].push(temp);
-      node += '<span>'+studentsInfo[id].name+'</span><br>';
-      $("#"+id).parent().css("display","none");
-    });
-    node += '</div><a class="remove-group" href="#" onclick="removeGroup(\''+idRoom+'\')">Remove</a><a class="join-group" href="#" onclick="joinGroup(\'' + idRoom + '\')">Join</a></div >';
-    $("#groups-container").append(node);
-    $(".join-group").css("display","none");
-    nRooms = Object.keys(roomsCreated).length;
-    roomsCreated[idRoom].groupName = "Group "+ nRooms;
-    $("#group"+idRoom+">p").html("Group "+nRooms);
-     if (nRooms > 1) {
-      head = 'YOU HAVE CREATED ' + nRooms + ' ROOMS';
-    } else {
-      head = 'YOU HAVE CREATED ' + nRooms + ' ROOM';
+      node += '<span>' + studentsInfo[tempId].name + '</span><br>';
+      count++;
+      if(count>=students.length){
+        break
+      }
+      tempId = students[count];
+      temp = studentsInfo[tempId];
+      temp.id = tempId;
+      roomsCreated[idRoom].push(temp);
+      node += '<span>' + studentsInfo[tempId].name + '</span><br>';
+      count++;
+      if(count == students.length-1 && nStud % 2 == 1){
+        tempId = students[count];
+        temp = studentsInfo[tempId];
+        temp.id = tempId;
+        roomsCreated[idRoom].push(temp);
+        node += '<span>' + studentsInfo[tempId].name + '</span><br>';
+      }
+       if (count >= students.length) {
+        break
+      }
+      if(count%2==0 || (count == students.length - 1 && nStud % 2 == 1)){
+        node += '</div><a class="remove-group" href="#" onclick="removeGroup(\'' + idRoom + '\')">Remove</a><a class="join-group" href="#" onclick="joinGroup(\'' + idRoom + '\')">Join</a></div >';
+        $("#groups-container").append(node);
+        $(".join-group").css("display", "none");
+        nRooms = Object.keys(roomsCreated).length;
+        roomsCreated[idRoom].groupName = "Group " + nRooms;
+        $("#group" + idRoom + ">p").html("Group " + nRooms);
+        if (nRooms > 1) {
+          head = 'YOU HAVE CREATED ' + nRooms + ' ROOMS';
+        } else {
+          head = 'YOU HAVE CREATED ' + nRooms + ' ROOM';
+        }
+        $("#head-groups").html(head);
+        if(count != students.length - 1){
+          idRoom = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+          roomsCreated[idRoom] = [];
+        }
+      }
     }
-    $("#head-groups").html(head);
+
     groups = [];
+    console.log("roomsCreated")
     console.log(roomsCreated)
     enableCreateGroup()
     enableTimer();
@@ -489,5 +529,5 @@
     enableTimer();
     getStudents();
   }
-  */
+  
 </script>

@@ -1,3 +1,7 @@
+nav{
+  color:#fff;
+}
+
 #index-body {
   background-image: url("../img/background-login.jpg");
   background-repeat: no-repeat;
@@ -475,11 +479,61 @@ Users-manually
 .room-active{
   display: none;
 }
-
+#chat{
+  position: relative;
+  display: initial;
+}
+.open-chat-mobile{
+  display: none;
+}
+.open-chat-mobile>i{
+  color: #464baa;
+  background-color: #18193b;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 28px;
+  border-radius: 1em;
+}
+#close-chat{
+  padding:10px 15px;
+  display: none;
+}
+@media only screen /* ipad modus */
+and (max-device-width : 768px) {
+  .open-chat-mobile{
+    display: inline-block;
+    float: right;
+    margin-bottom: 15px;
+  }
+  #chat{
+    display: none;
+    position: absolute;
+    bottom:0;
+    left:0;
+    width:98%;
+    margin-left:1%;
+    margin-bottom:70px;
+    height: 100vw;
+    background:#0b0c22;
+  }
+  .chat-container{
+    border-top:1px solid #1f2149;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+  }
+  .video-remote-container{
+    margin:auto;
+  }
+  .video-remote{
+    max-width:unset !important;
+  }
+}
 .chat-container{
   height: 90%;
   max-height: 700px;
   overflow:auto;
+  background-color: #0b0c22;
 }
 
 .chat-input{
@@ -561,19 +615,26 @@ Users-manually
   color: white;
   text-shadow: 1px 1px 3px #000;
 }
+.name-in-video-prof{
+  position: absolute;
+  font-size:10px;
+  color: white;
+  text-shadow: 1px 1px 3px #000;
+}
 
 .video-local-container{
  margin:auto;
 }
 .video-local{
-  width:20%;
+  width:100%;
 }
 .video-remote-container{
-  margin-top:100px !important;
-  margin:auto;
+  /* margin:auto; */
+  float:left;
 }
 .video-remote{
   width:100%;
+  max-width:40vw;
 }
 
   .column-participant {

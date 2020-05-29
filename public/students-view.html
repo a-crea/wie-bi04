@@ -14,13 +14,13 @@
 
 <body id="dashboard-body">
   <nav class="navbar fixed-top navbar-default">
-    <div class="col-sm-9 room-active">
-      <div id="timer" style="color:white;">
+    <div class="col-12 col-md-3 room-active">
+      <div id="timer">
         <H4>TIMER</H4>
         <h4 id="time">--:--</h4>
       </div>
     </div>
-    <div class="room-active" id="timer" style="color:white;">
+    <div class="room-active">
       <h5>Request more time</h5>
       <div class="input-group">
         <select class="custom-select" id="more-time-select">
@@ -68,7 +68,7 @@
       </div>
     </div>
     <div class="row room-active">
-      <div class="col-sm-10">
+      <div class="col-12 col-md-8 col-xl-10">
         <div class="row" id="videos-remote-container">
           <div id="video-placeholder" class="row text-center">
             <div class="col my-auto">
@@ -80,23 +80,32 @@
           </div>
         </div>
         <div class="row">
-          <div id="video-professor-ale" style="display: none;">
-            <h2 class="text-box">Professor</h2>
+          <div class="col-6 col-md-2">
+            <div id="video-professor-ale">
+            </div>
           </div>
-          <div id="video-me-ale">
-            <!-- <h2 class="text-box">Me</h2> -->
+          <div class="col-6 col-md-2">
+            <div id="video-me-ale">
+            </div>
           </div>
         </div>
 
       </div>
-      <div class="col-sm-2">
-        <div class="chat-container">
+      <div class="col-12 col-md-4 col-xl-2">
+        <div class="open-chat-mobile">
+          <i id="open-chat" class="fas fa-comment-dots"></i>
+          <i id="close-chat" class="fas fa-times"></i>
         </div>
-        <div class="input-group">
-          <input type="text" class="form-control chat-input" placeholder="Message..." aria-label="Message..."
-            aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button id="btn-send" class="btn btn-outline-secondary" type="button" disabled><i class="fas fa-paper-plane"></i></button>
+        <div id="chat">
+          <div class="chat-container">
+          </div>
+          <div class="input-group">
+            <input type="text" class="form-control chat-input" placeholder="Message..." aria-label="Message..."
+              aria-describedby="basic-addon2">
+            <div class="input-group-append">
+              <button id="btn-send" class="btn btn-outline-secondary" type="button" disabled><i
+                  class="fas fa-paper-plane"></i></button>
+            </div>
           </div>
         </div>
       </div>
@@ -105,8 +114,7 @@
   </div>
 </body>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
   integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
