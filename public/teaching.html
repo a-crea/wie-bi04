@@ -7,9 +7,20 @@
   <meta name="description" content="wie-bi04-project">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" a href="style/style.css">
   <title>Assign students to professors</title>
 </head>
-<body>
+<body id="dashboard-body">
+  <nav class="navbar fixed-top navbar-default">
+    <a class="navbar-brand" href="#">Dashboard</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+      <ul class="nav navbar-nav navbar-right">
+      <li>Welcome, <span id="professor-name"></span></li>
+      <li><a onclick="signOut()" href="#">Logout</a></li>
+      </ul>
+</nav>
   <div class="modal fade" id="modal-message" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -29,22 +40,22 @@
     </div>
   </div>
   <div class="container text-center">
-    <h1>Select Professor</h1>
+    <h1 class="textDefault">Select Professor</h1>
       <div class="form-group">
-        <label for="professors-list">Professors</label>
+        <label for="professors-list" class="textDefault">Professors</label>
         <select class="form-control" id="professors-list">
         </select>
       </div>
     <div id="students-container" style="display: none;">
-      <h1>Select students</h1>
+      <h1 class="textDefault">Select students</h1>
       <div class="form-group">
-        <label for="professors-list">Students</label>
+        <label for="professors-list" class="textDefault">Students</label>
         <select multiple class="form-control" id="students-list"></select>
       </div>
     </div>
 
     <div id="students-assigned-container">
-      <h1>Student assigned to this professor</h1>
+      <h1 class="textDefault">Student assigned to this professor</h1>
       <div id="students-list-assigned">
 
       </div>

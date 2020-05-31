@@ -15,6 +15,7 @@ nav{
   padding-top: 110px;
 }
 #dashboard-body{
+  font-family: Arial, Helvetica, sans-serif;
   background: #0b0c22;
   padding-top: 100px;
   overflow-x: hidden;
@@ -165,7 +166,6 @@ input[id="password"] {
   margin-bottom: 30px;
   background-color: #fff;
   padding-left: 30px;
- margin-left: 40px;
 }
 
 #btn-login {
@@ -606,9 +606,6 @@ and (max-device-width : 768px) {
   color: #464646;
 }
 
-#videos-remote-container{
-}
-
 .name-in-video{
   position: absolute;
   padding: 10px 20px;
@@ -700,6 +697,7 @@ and (max-device-width : 704px) {
   position: absolute; 
   right: 0;
   text-align: center;
+  z-index: -1;
 }
 .text-box{
   text-align: center;
@@ -734,6 +732,12 @@ width: 100%;
 
 #timer{
   padding-left: 0px;
+}
+#features-container {
+  display: none;
+}
+.btn-features{
+  display: none;
 }
 }
 
@@ -780,8 +784,10 @@ and (max-height : 825px) {
   #timer{
     padding-left: 0px;
   }
+  #features-plus{
+    display: none;
   }
-  
+  }
 
 @media only screen and (min-device-width : 320px)  /*iphone 5 */
 and (max-device-width : 374px) {
@@ -791,6 +797,7 @@ and (max-device-width : 374px) {
   position: absolute; 
   right: 0;
   text-align: center;
+  z-index: -1;
 }
 .text-box{
   text-align: center;
@@ -823,14 +830,21 @@ width: 100%;
   vertical-align: middle;
   line-height: 120px;
 }
-
 #timer{
   padding-left: 0px;
 }
+
+#features-container {
+  display: none;
+}
+.btn-features{
+  display: none;
+}
+
 }
 
 @media only screen /* ipad modus */
-and (min-device-width : 768px) 
+and (min-device-width : 704px) 
 and (max-device-width : 790px) {
   #video-me{
     height: 105px;
@@ -872,6 +886,9 @@ and (max-device-width : 790px) {
   
   #timer{
     padding-left: 0px;
+  }
+  #features-plus{
+    display: none;
   }
 }
 
@@ -919,4 +936,41 @@ and (max-device-width : 1030px) {
   #timer{
     padding-left: 0px;
   }
+  #features-plus{
+    display: none;
+  }
+}
+
+/*Features*/
+
+#features-container{
+  margin-top: 150px;
+  vertical-align: middle; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btn-features{
+  border-radius: 50%;
+  background-color: darkslategrey;
+  margin: 5px;
+}
+
+.icon{
+  width: 100%;
+  height: 100%;
+}
+
+#features-plus{ 
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  color: #18193b;
+  background-color: white;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 28px;
+  border-radius: 1em;
 }
