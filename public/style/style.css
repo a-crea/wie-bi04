@@ -733,12 +733,6 @@ width: 100%;
 #timer{
   padding-left: 0px;
 }
-#features-container {
-  display: none;
-}
-.btn-features{
-  display: none;
-}
 }
 
 @media only screen and (min-height : 812px)  
@@ -783,9 +777,6 @@ and (max-height : 825px) {
   
   #timer{
     padding-left: 0px;
-  }
-  #features-plus{
-    display: none;
   }
   }
 
@@ -833,14 +824,6 @@ width: 100%;
 #timer{
   padding-left: 0px;
 }
-
-#features-container {
-  display: none;
-}
-.btn-features{
-  display: none;
-}
-
 }
 
 @media only screen /* ipad modus */
@@ -886,9 +869,6 @@ and (max-device-width : 790px) {
   
   #timer{
     padding-left: 0px;
-  }
-  #features-plus{
-    display: none;
   }
 }
 
@@ -936,18 +916,13 @@ and (max-device-width : 1030px) {
   #timer{
     padding-left: 0px;
   }
-  #features-plus{
-    display: none;
-  }
 }
 
 /*Features*/
 
-#features-container{
-  margin-top: 150px;
-  vertical-align: middle; 
+#features-container{ 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
 }
 
@@ -958,19 +933,5 @@ and (max-device-width : 1030px) {
 }
 
 .icon{
-  width: 100%;
-  height: 100%;
-}
-
-#features-plus{ 
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  color: #18193b;
-  background-color: white;
-  padding: 10px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: 28px;
-  border-radius: 1em;
+  color: #79ff6c;
 }
