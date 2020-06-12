@@ -20,6 +20,20 @@ nav{
   padding-top: 100px;
   overflow-x: hidden;
 }
+
+@media screen and (max-width: 600px) {
+  #dashboard-body {padding-top: 140px; }
+}
+
+.btn-text{
+  color: white;
+}
+
+.btn-style{
+  background-color: #00aa55;
+  text-align: center;
+}
+
 #list{
   background-color: #0b0c22;
   width: 100%;
@@ -196,7 +210,7 @@ Stylesheet of Professor Dashboard
 }
 
 .navbar-default {
-  background-color: rgb(119, 160, 185);
+  background-color: rgb(76, 132, 167);
 }
 .navbar-default .navbar-brand {
   color: white;
@@ -244,9 +258,7 @@ p.list-group {
 }
 
 #set-timer-btn{
-  background-color: #62b85a;
   position: absolute;
-  text-align: center;
   width: 100%;
   top: 50%;
 }
@@ -260,17 +272,13 @@ p.list-group {
   height: 2cm;
 }
 
-#start-btn{
-  left: 200px;
-  text-align: center;
-  background-color:#79ff6c ;
-  color: black;
-}
-
-
 .modal-title{
   text-align: center;
   padding-left: 180px;
+}
+
+.modal-body, .modal-header{
+  background-color: #00aa55;
 }
 
 @media only screen and (max-width: 600px) {
@@ -935,23 +943,4 @@ and (max-device-width : 1030px) {
 
 .icon{
   color: #79ff6c;
-}
-
-.btn-group button{
-  text-align: center;
-  display: block;
-}
-@media only screen and (min-width:600px) {
-  .hide-on-desktop, * [aria-labelledby='hide-on-desktop'] {
-      display: none;
-      max-height: 0;
-      overflow: hidden;
-  }
-}
-
-
-  @media (max-width: 480px) {
-    #features-container {
-      display: none;
-    }
 }
