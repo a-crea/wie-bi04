@@ -131,14 +131,13 @@ color: #fff;
 }
 
 .notification-badge{
-  background-color: #ccc;
   width: 95%;
   margin:auto;
   display: inline-flex;
   padding: 5px;
   margin-top: 10px;
   text-align: center;
-  color: #555;
+  color: #fff;
 }
 
 .icons-notification{
@@ -153,12 +152,28 @@ color: #fff;
 }
 
 .accept-notification{
-  color:green;
+  color: #2b9e21;
 }
 .refuse-notification{
-  color:red;
+  color: #00898b;}
+
+.glow {
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
 }
 
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00cad8, 0 0 40px #00cad8, 0 0 50px #00cad8, 0 0 60px #00cad8, 0 0 70px #00cad8;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #4dff97, 0 0 40px #4dff97, 0 0 50px #4dff97, 0 0 60px #4dff97, 0 0 70px #4dff97, 0 0 80px #4dff97;
+  }
+}
 
 @media only screen and (max-width: 600px) {
   #login {
@@ -275,10 +290,6 @@ p.list-group {
 .modal-title{
   text-align: center;
   padding-left: 180px;
-}
-
-.modal-body, .modal-header{
-  background-color: #00aa55;
 }
 
 @media only screen and (max-width: 600px) {
@@ -511,7 +522,7 @@ Users-manually
 @media only screen /* ipad modus */
 and (max-device-width : 768px) {
   .open-chat-mobile{
-    display: inline-block;
+    display: block;
     float: right;
     margin-bottom: 15px;
   }
@@ -942,5 +953,5 @@ and (max-device-width : 1030px) {
 }
 
 .icon{
-  color: #79ff6c;
+  color: #00aa55;
 }
