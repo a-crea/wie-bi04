@@ -22,7 +22,7 @@ nav{
 }
 
 @media screen and (max-width: 600px) {
-  #dashboard-body {padding-top: 140px; }
+  #dashboard-body {padding-top: 170px; }
 }
 
 .btn-text{
