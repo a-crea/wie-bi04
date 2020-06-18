@@ -352,7 +352,7 @@
   }
 
   function addNotification(type, idRoom, time){
-    let node = '<div id="not'+idRoom+type+'" class="notification-badge">';
+    let node = '<div id="not'+idRoom+type+'" class="notification-badge glow">';
     if(type == "help"){
         node += roomsCreated[idRoom].groupName + ' needs help';
         node += '<span class="icons-notification"><i onclick="handleNotification(true,\'help\',\''+idRoom+'\',null)" class="fas fa-check-square accept-notification"></i><i onclick="handleNotification(false,\'help\',\'' + idRoom +'\',null)" class="fas fa-times-circle refuse-notification"></i></span></div>';    
