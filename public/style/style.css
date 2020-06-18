@@ -160,6 +160,7 @@ color: #fff;
 
 .accept-notification{
   color: #2b9e21;
+  margin-right: 10px;
 }
 .refuse-notification{
   color: #00898b;}
@@ -174,11 +175,11 @@ color: #fff;
 
 @-webkit-keyframes glow {
   from {
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00cad8, 0 0 40px #00cad8, 0 0 50px #00cad8, 0 0 60px #00cad8, 0 0 70px #00cad8;
+    text-shadow: 0 0 2px #949494, 0 0 4px #949494, 0 0 6px #949494, 0 0 8px #949494, 0 0 10px #949494, 0 0 12px #949494, 0 0 14px #949494;
   }
   
   to {
-    text-shadow: 0 0 20px #fff, 0 0 30px #4dff97, 0 0 40px #4dff97, 0 0 50px #4dff97, 0 0 60px #4dff97, 0 0 70px #4dff97, 0 0 80px #4dff97;
+    text-shadow: 0 0 4px #949494, 0 0 6px #0b0c22, 0 0 8px #0b0c22, 0 0 10px #0b0c22, 0 0 12px #0b0c22, 0 0 14px #0b0c22, 0 0 16px #0b0c22;
   }
 }
 
