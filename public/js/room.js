@@ -56,6 +56,9 @@ $(function () {
             document.getElementById("back-prof").addEventListener("click", goBack);
             document.getElementById("open-chat").addEventListener("click", toggleChat);
             document.getElementById("close-chat").addEventListener("click", toggleChat);
+            $(".fa-video").parent().on("click", toggleLocalVideo);
+            $(".fa-microphone").parent().on("click", toggleLocalMic);
+            $(".fa-question-circle").parent().on("click", askForHelp);
 
             function goBack(){
                 let url = window.location.origin;
@@ -94,7 +97,6 @@ $(function () {
                         $("#more-time-select").removeAttr("disabled");
                         $("#request-time-btn").removeAttr("disabled");
                     }
-                    // console.log("time, disable button if >0")
                 });
                 var helpRT = realTimeDb.ref(prof + '/rooms/' + idRoom + '/needsHelp');
                 helpRT.on('value', function (snapshot) {
@@ -201,7 +203,9 @@ $(function () {
             function connectToRoom() {
                 connection.extra = {
                     name: name,
-                    isProf: isProf
+                    isProf: isProf,
+                    mutedVideo: false,
+                    mutedAudio: false
                 };
                 connection.join(idRoom, function (isJoined, roomid, error) {
                     if (isJoined === false) {
@@ -254,7 +258,7 @@ $(function () {
             connection.session = {
                 audio: true,
                 video: true,
-                data: false
+                data: true
             };
 
             connection.candidates = {
@@ -333,11 +337,16 @@ $(function () {
                     name: remoteName,
                     isProf: remoteRole
                 }
-                // console.log(event)
                 let classVideo, classVideoContainer;
                 let video = document.createElement('video');
                 let div = document.createElement('div');
                 let span = document.createElement('span');
+                let controls = '<div id="controls'+remoteUserId+'" class="video-controls">'
+                controls += '<i class="fas fa-play" style="display:none;" data-video-ref="' + remoteUserId + '"></i>'
+                controls += '<i class="fas fa-pause" data-video-ref="' + remoteUserId + '"></i>'
+                controls += '<i class="fas fa-volume-up" data-video-ref="' + remoteUserId +'"></i>'
+                controls += '<i class="fas fa-volume-mute" style="display:none;" data-video-ref="' + remoteUserId + '"></i>'
+                controls += '</div>';
                 event.mediaElement.removeAttribute('src');
                 event.mediaElement.removeAttribute('srcObject');
                 if (event.type === 'local') {
@@ -363,22 +372,99 @@ $(function () {
                     span.appendChild(nameSpan);
                     div.append(span);
                 }
-                video.controls = true;
+                video.controls = false;
                 video.autoplay = true;
                 video.setAttribute('playsinline', 'playsinline');
                 video.allowsInlineMediaPlayback = true;
                 video.classList.add(classVideo);
+                video.setAttribute('id', "video"+remoteUserId);
                 div.setAttribute('id', remoteUserId);
                 div.classList.add(classVideoContainer);
                 video.srcObject = event.stream;
                 div.append(video);
+                
                 if ($("#" + remoteUserId).length==0){
                     connection.videosContainer.append(div);
+                    if (event.type !== 'local' && peersInfo[remoteUserId].isProf != true)
+                    {
+                        $("#"+ remoteUserId).append(controls);
+                        $("#controls" + remoteUserId + ">i.fa-play").on("click", playVideo);
+                        $("#controls" + remoteUserId + ">i.fa-pause").on("click", pauseVideo);
+                        $("#controls" + remoteUserId + ">i.fa-volume-up").on("click", volumeUpVideo);
+                        $("#controls" + remoteUserId + ">i.fa-volume-mute").on("click", muteVideo);
+                    }
                     checkProfDiv()
                     // setTimeout(function () {
                     //     video.play();
                     // }, 5000);
                 }
+            }
+
+            function toggleLocalVideo(){
+                let localStream = connection.attachStreams[0];
+                console.log()
+                if(connection.extra.mutedVideo == true){
+                    connection.extra.mutedVideo = false;
+                    localStream.unmute('video');
+                } else {
+                    connection.extra.mutedVideo = true;
+                    localStream.mute('video');
+                }
+            }
+
+            function toggleLocalMic(){
+                let localStream = connection.attachStreams[0];
+                if (connection.extra.mutedAudio == true) {
+                    connection.extra.mutedAudio = false;
+                    localStream.unmute('audio');
+                } else {
+                    connection.extra.mutedAudio = true;
+                    localStream.mute('audio');
+                }
+            }
+
+            function askForHelp(){
+                realTimeDb.ref(prof + '/rooms/' + idRoom).update({
+                    needsHelp: true
+                })
+            }
+
+            function playVideo(event) {
+                let id = event.target.getAttribute("data-video-ref");
+                let target = document.getElementById("video" + id)
+                let streamByUserId = connection.streamEvents.selectFirst({ userid: id }).stream;
+                console.log(connection.streamEvents.selectFirst({ userid: id }).extra)
+                if ($("#controls" + id + ">i.fa-volume-up").is(":visible")){
+                    streamByUserId.unmute("audio");
+                }
+                target.play()
+                $("#controls" + id + ">i.fa-play").toggle()
+                $("#controls" + id + ">i.fa-pause").toggle()
+            }
+            function pauseVideo(event) {
+                let id = event.target.getAttribute("data-video-ref");
+                let target = document.getElementById("video" + id)
+                let streamByUserId = connection.streamEvents.selectFirst({ userid: id }).stream;
+                streamByUserId.mute("audio");
+                target.pause()
+                $("#controls" + id + ">i.fa-play").toggle()
+                $("#controls" + id + ">i.fa-pause").toggle()
+            }
+            function volumeUpVideo() {
+                let id = event.target.getAttribute("data-video-ref");
+                let streamByUserId = connection.streamEvents.selectFirst({ userid: id }).stream;
+                streamByUserId.mute("audio");
+                $("#controls" + id + ">i.fa-volume-up").toggle()
+                $("#controls" + id + ">i.fa-volume-mute").toggle()
+            }
+            function muteVideo() {
+                let id = event.target.getAttribute("data-video-ref");
+                let streamByUserId = connection.streamEvents.selectFirst({ userid: id }).stream;
+                if ($("#controls" + id + ">i.fa-pause").is(":visible")) {
+                    streamByUserId.unmute("audio");
+                }
+                $("#controls" + id + ">i.fa-volume-up").toggle()
+                $("#controls" + id + ">i.fa-volume-mute").toggle()
             }
 
             function checkProfDiv(){

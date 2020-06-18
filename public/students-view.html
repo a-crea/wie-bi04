@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <meta name="author" content="wie-bi04">
-   <meta name="description" content="wie-bi04-project">
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-   <link href="style/fontawesome/css/all.css" rel="stylesheet">
-     <title>Video room</title>
-   <link rel="stylesheet" a href="style/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="wie-bi04">
+  <meta name="description" content="wie-bi04-project">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link href="style/fontawesome/css/all.css" rel="stylesheet">
+  <title>Video room</title>
+  <link rel="stylesheet" a href="style/style.css">
 </head>
 
 <body id="dashboard-body">
@@ -76,9 +77,9 @@
           <div id="video-placeholder" class="row text-center">
             <div class="col my-auto">
               <h3 class="textDefault">Waiting...</h3>
-            <div class="spinner-border text-light" role="status">
-              <span class="sr-only">Waiting for connection...</span>
-            </div>
+              <div class="spinner-border text-light" role="status">
+                <span class="sr-only">Waiting for connection...</span>
+              </div>
             </div>
           </div>
         </div>
@@ -89,49 +90,52 @@
           </div>
           <div class="col-6 col-md-2">
             <div id="video-me-ale">
-              <div class="hide-on-desktop" aria-labelledby="hide-on-desktop" style="mso-hide: all;">
-                <i class="icon fas fa-plus" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"></i>
+              <div class="d-block d-sm-none">
+                <button class="btn btn-features" data-toggle="collapse" data-target="#controlsCollapsed" aria-expanded="false"
+                  aria-controls="controlsCollapsed">
+                  <i class="icon fas fa-plus"></i>
+                </button>
                 <div class="btn-group">
-                       <div class="collapse" id="collapseExample">
-                         <button class="btn btn-lg btn-features"><i class="icon fas fa-video"></i></button>
-                         <button class="btn btn-lg btn-features"><i class="icon fas fa-microphone"></i></button>
-                         <button class="btn btn-lg btn-features"><i class="icon far fa-question-circle"></i></button>
-            </div>
-            </div> 
-            </div>
-            </div>
-            </div>
-        </div>
-
-             <div class="col-12 col-md-4 col-xl-2">
-               <div id="features-container">
-                 <button class="btn btn-lg btn-features"><i class="icon fas fa-video"></i></button>
-                 <button class="btn btn-lg btn-features"><i class="icon fas fa-microphone"></i></button>
-                 <button class="btn btn-lg btn-features"><i class="icon far fa-question-circle"></i></button>
-               </div>
-          
-        <div class="open-chat-mobile">
-          <i id="open-chat" class="fas fa-comment-dots"></i>
-          <i id="close-chat" class="fas fa-times"></i>
-        </div>
-        <div id="chat">
-          <div class="chat-container">
-            <div id="chat-disclaimer">
-              Please notice that the messages are not saved. Reloading or closing the page will make you lose the messages.
-            </div>
-          </div>
-          <div class="input-group">
-            <input type="text" class="form-control chat-input" placeholder="Message..." aria-label="Message..."
-              aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button id="btn-send" class="btn btn-outline-secondary" type="button" disabled><i
-                  class="fas fa-paper-plane"></i></button>
+                  <div class="collapse" id="controlsCollapsed">
+                    <button class="btn btn-lg btn-features"><i class="icon fas fa-video"></i></button>
+                    <button class="btn btn-lg btn-features"><i class="icon fas fa-microphone"></i></button>
+                    <button class="btn btn-lg btn-features"><i class="icon far fa-question-circle"></i></button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
+        <div class="col-12 col-md-4 col-xl-2">
+          <div id="features-container" class="d-none d-sm-block">
+            <button class="btn btn-lg btn-features"><i class="icon fas fa-video"></i></button>
+            <button class="btn btn-lg btn-features"><i class="icon fas fa-microphone"></i></button>
+            <button class="btn btn-lg btn-features"><i class="icon far fa-question-circle"></i></button>
+          </div>
+        
+          <div class="open-chat-mobile">
+            <i id="open-chat" class="fas fa-comment-dots"></i>
+            <i id="close-chat" class="fas fa-times"></i>
+          </div>
+          <div id="chat">
+            <div class="chat-container">
+              <div id="chat-disclaimer">
+                Please notice that the messages are not saved. Reloading or closing the page will make you lose the
+                messages.
+              </div>
+            </div>
+            <div class="input-group">
+              <input type="text" class="form-control chat-input" placeholder="Message..." aria-label="Message..."
+                aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button id="btn-send" class="btn btn-outline-secondary" type="button" disabled><i
+                    class="fas fa-paper-plane"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
-
   </div>
 </body>
 
@@ -140,20 +144,21 @@
   integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-      <script src="/__/firebase/7.14.2/firebase-app.js"></script>
-    <script src="/__/firebase/7.14.2/firebase-auth.js"></script>
-    <script src="/__/firebase/7.14.2/firebase-firestore.js"></script>
-    <script src="/__/firebase/7.14.2/firebase-database.js"></script>
-    <script src="/__/firebase/7.14.2/firebase-functions.js"></script>
-    <script src="/__/firebase/init.js"></script>
-    <script src="js/FileBufferReader.js"></script>
-    <script src="js/rtc-adapter.js"></script>
-    <script src="js/socket.io.js"></script>
-    <script src="js/RTCMultiConnection.min.js"></script>
-    <script src="js/getHTMLMediaElement.js"></script>  
-    <script src="js/room.js"></script>
-  </body>
-  <script type="text/javascript">
+<script src="/__/firebase/7.14.2/firebase-app.js"></script>
+<script src="/__/firebase/7.14.2/firebase-auth.js"></script>
+<script src="/__/firebase/7.14.2/firebase-firestore.js"></script>
+<script src="/__/firebase/7.14.2/firebase-database.js"></script>
+<script src="/__/firebase/7.14.2/firebase-functions.js"></script>
+<script src="/__/firebase/init.js"></script>
+<script src="js/FileBufferReader.js"></script>
+<script src="js/rtc-adapter.js"></script>
+<script src="js/socket.io.js"></script>
+<script src="js/RTCMultiConnection.min.js"></script>
+<script src="js/getHTMLMediaElement.js"></script>
+<script src="js/room.js"></script>
+</body>
+<script type="text/javascript">
 
-  </script>
-  </html>
+</script>
+
+</html>

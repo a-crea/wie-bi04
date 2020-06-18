@@ -499,6 +499,18 @@ Users-manually
 
 /* students-view */
 
+.video-controls{
+  position:absolute;
+  margin-top: -50px;
+  left:10px;
+}
+.video-controls i{
+  padding: 5px;
+  color: #fff;
+  font-size: 1.3em;
+  text-shadow: 1px 1px 3px #000;
+}
+
 #video-placeholder{
   height:500px;
   width: 100%;
@@ -638,13 +650,10 @@ and (max-device-width : 768px) {
   color: #464646;
 }
 
-<<<<<<< HEAD
 #videos-remote-container{
   max-height: 500px;
 }
 
-=======
->>>>>>> 92e5b11fbfdea0b02e75f388de3d4802c47d8cd5
 .name-in-video{
   position: absolute;
   padding: 10px 20px;
@@ -654,6 +663,7 @@ and (max-device-width : 768px) {
 .name-in-video-prof{
   position: absolute;
   font-size:10px;
+  padding-left:5px;
   color: white;
   text-shadow: 1px 1px 3px #000;
 }
