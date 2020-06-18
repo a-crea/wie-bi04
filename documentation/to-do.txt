@@ -1,9 +1,11 @@
 TO DO
-- Error login failed
-- add disclaimer: chat messages not saved
-- screen sharing
+- command on videos (remote: icon absolute in div and on click handle by user id, see docum)
+- if not video not starting: add disclaimer or accept only audio(?)
+/*- screen sharing*/ no
 //----------------------------------------------//
 DONE:
+- add disclaimer: chat messages not saved
+- Error login failed
 - jump in room prof
 - sometimes remain on waiting room
 - random match

@@ -20,7 +20,10 @@
         <h4 id="time">--:--</h4>
       </div>
     </div>
-    <div class="room-active">
+    <div id="back-prof" style="display: none;">
+      <button class="btn btn-danger">GO BACK</button>
+    </div>
+    <div id="request-time-container" class="room-active">
       <h5>Request more time</h5>
       <div class="input-group">
         <select class="custom-select" id="more-time-select">
@@ -113,6 +116,9 @@
         </div>
         <div id="chat">
           <div class="chat-container">
+            <div id="chat-disclaimer">
+              Please notice that the messages are not saved. Reloading or closing the page will make you lose the messages.
+            </div>
           </div>
           <div class="input-group">
             <input type="text" class="form-control chat-input" placeholder="Message..." aria-label="Message..."
@@ -144,8 +150,8 @@
     <script src="js/rtc-adapter.js"></script>
     <script src="js/socket.io.js"></script>
     <script src="js/RTCMultiConnection.min.js"></script>
-      <!-- <script src="js/getHTMLMediaElement.js"></script> -->  
-      <script src="js/room.js"></script>
+    <script src="js/getHTMLMediaElement.js"></script>  
+    <script src="js/room.js"></script>
   </body>
   <script type="text/javascript">
 

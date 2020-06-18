@@ -1,4 +1,4 @@
-/*
+
 var db = firebase.firestore();
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
@@ -22,6 +22,8 @@ firebase.auth().onAuthStateChanged(function (user) {
     }
 });
 function login() {
+    $("#login-spinner").css("display","flex");
+    $("#login-form").toggle();
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -29,13 +31,17 @@ function login() {
             console.log(result);
         }).catch(function (error) {
             console.log(error);
+            $("#login-spinner").css("display", "none");
+            $("#login-form").toggle();
+            $('#login-error').modal('toggle')
         });
 }
 $(function () {
+    $("#btn-login").removeAttr("disabled");
     $("input").keypress(function (event) {
         if (event.keyCode === 13) {
             $("#btn-login").click();
         }
     }); 
 });
-*/
+

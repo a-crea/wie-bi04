@@ -88,7 +88,8 @@
 
 </div>
 <script type="text/javascript">
-/*
+  $("#back-prof").css("display","flex");
+  document.getElementById("back-prof").addEventListener('click',goBack);
   var uidProf = null;
   var studentsInfo = {};
   var students = null;
@@ -109,16 +110,10 @@
                 $("#professor-name").html(user.displayName);
                 let alreadyInDb = null;
                 realTimeDb.ref(uidProf).once('value', function (snapshot) {
-                  // console.log(snapshot)
                   alreadyInDb = snapshot.val()
                   if(alreadyInDb && alreadyInDb.rooms){
                     setRoomsCreated(alreadyInDb)
-                    console.log(alreadyInDb)
                   } else {
-                    realTimeDb.ref(uidProf).set({
-                      mode: "randomly",
-                      joining: false
-                    })
                     getStudents();
                   }
                 });
@@ -135,6 +130,10 @@
           window.location.replace(url + "/index.html");
       }
   });
+  function goBack(){
+    let url = window.location.origin;
+    window.location.replace(url + "/professor.html");
+  }
   function setRoomsCreated(inRTDB) {
     endTimeGlobal = new Date(inRTDB.endtime);
     let students = inRTDB.students;
@@ -152,7 +151,6 @@
         }
       }
     }
-    console.log(roomsCreated)
     createGroupFromDB();
     countdownInit();
   }
@@ -171,7 +169,6 @@
       roomsCreated[idRoom].forEach(student => {
         node += '<span>' + student.name + '</span><br>';
       })
-      // node+='</div></div>';
       node += '</div><a class="join-group" href="#" onclick="joinGroup(\'' + idRoom + '\')">Join</a></div>';
       $("#groups-container").append(node);
     }
@@ -196,7 +193,6 @@
         name = user.data().name;
         node = '<li tabindex="-1" role="option" aria-checked="false" class="list-group-item">' + name;
         node += '<input id="' + id + '" class="custom-checkbox" value="' + id + '" tabindex="-1" type="checkbox" onclick="addToArrGroups(\'' + id + '\')"></li>';
-        // $("#students-list").append(node);
         studentsInfo[id] = {
           state: 'away',
           name: user.data().name,
@@ -208,12 +204,12 @@
           room: null,
         });
       })
-      console.log(position)
       position++;
       if (position == students.length) {
         setTimeout(createGroup, 1000);
       }
     });
+    setModeMatching()
     realTimeReadStudents();
   }
 
@@ -232,7 +228,6 @@
     let idRoom,node,head,update,temp,nRooms,count,tempId,tempId2;
     count=0;
     let nStud = Object.keys(students).length
-    console.log(nStud)
     idRoom = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
     roomsCreated[idRoom] = [];
     shuffle(students);
@@ -287,8 +282,6 @@
 
     $("#creating-rooms").remove();
     groups = [];
-    console.log("roomsCreated")
-    console.log(roomsCreated)
     enableTimer();
   }
 
@@ -337,8 +330,8 @@
   function realTimeReadStudents(){
     var studentRealTime = realTimeDb.ref(uidProf + '/students/');
     studentRealTime.on('value', function (snapshot) {
-      console.log(snapshot)
-      console.log(snapshot.val())
+      // console.log(snapshot)
+      // console.log(snapshot.val())
     });
   }
 
@@ -348,20 +341,13 @@
       let data = snapshot.val();
       for(key in data){
         let room = data[key];
-        console.log(room)
         if(room.moreTime>0 && $("#not"+key+"time").length==0){
-          console.log(room.moreTime)
           addNotification("time", key, room.moreTime);
         }
         if(room.needsHelp == true && $("#not"+key+"help").length == 0){
-          console.log(room.needsHelp)
           addNotification("help", key, null);
         }
       }
-      console.log("-------------------")
-      console.log("Rooms RT: ")
-      console.log(data)
-      console.log("-------------------")
     });
   }
 
@@ -399,7 +385,7 @@
         realTimeDb.ref(uidProf + '/rooms/' + idRoom).update({
           needsHelp: false
         });
-      console.log("connect to room")
+        joinGroup(idRoom)
     } else if(accept == false && type == "time"){
       realTimeDb.ref(uidProf + '/rooms/' + idRoom).update({
         moreTime: 0
@@ -414,6 +400,7 @@
   }
 
   function countdownInit(){
+    $("#back-prof").css("display", "none");
     fetch('https://worldtimeapi.org/api/timezone/Europe/Rome')
       .then(function (response) {
         return response.text();
@@ -448,5 +435,12 @@
     realTimeDb.ref(uidProf).remove();
     location.reload()
   }
-  */
+
+  function setModeMatching(){
+    realTimeDb.ref(uidProf).set({
+      mode: "randomly",
+      joining: false
+    })
+  }
+  
 </script>
