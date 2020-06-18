@@ -1,74 +1,79 @@
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+  <!-- Modal -->
+  <div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Set timer</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-row align-items-center">
-          <div class="col-auto my-1">
-            <label class="mr-sm-2" for="timer-select">Choose the minutes</label>
-            <select class="custom-select mr-sm-2" id="timer-select">
-              <option value="1" selected>1</option>
-              <option value="5">5</option>
-              <option value="10">10</option>
-              <option value="15">15</option>
-              <option value="20">20</option>
-              <option value="25">25</option>
-              <option value="30">30</option>
-            </select>
+      <!-- Modal content-->
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Set timer</h4>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+          <div class="form-row">
+            <div class="col-12">
+              <label class="mr-sm-2" for="timer-select">Choose the minutes</label>
+              <select class="custom-select mr-sm-2" id="timer-select">
+                <option value="1" selected>1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="30">30</option>
+              </select>
+            </div>
+          </div>
+          </div>
+          <br>
+          <div class="modal-footer">
+            <button onclick="initiateRooms()" type="button" id="start-btn" class="btn btn-style btn-text btn-block"
+              data-dismiss="modal"><h2>START</h2></button>
           </div>
         </div>
-        <div class="modal-footer">
-          <button onclick="initiateRooms()" type="button" id="start-btn" class="btn btn-success btn-block"
-            data-dismiss="modal">Start</button>
-        </div>
       </div>
+    </div>
     </div>
   </div>
-</div>
-<div class="row">
-  <div class="col-sm-3">
-    <div id="countdown-container" class="textDefault">
-
-    </div>
-    <div id="students-list-container">
-      <h2 class="textDefault">STUDENTS</h2>
-      <div id="list">
-        <ul id="students-list" role="listbox" tabindex="0" class="list-group">
-        </ul>
-      </div>
-      <div class="text-center">
-        <button id="create-group" class="btn btn-primary" onclick="createGroup()" disabled>Create group</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-sm-7">
-    <div class="main-section">
-        <div id="groups-temp">
-
+    <div class="row">
+      <div class="col-sm-3">
+        <div id="countdown-container" class="textDefault">
+    
         </div>
-        <div id="groups-created">
-          <h1 id="head-groups" class="textDefault">ROOMS CREATED</h1>
-            <div id="groups-container">
+        <div id="students-list-container">
+          <h2 class="textDefault">STUDENTS</h2>
+          <div id="list">
+            <ul id="students-list" role="listbox" tabindex="0" class="list-group">
+            </ul>
+          </div>
+          <div class="text-center">
+            <button id="create-group" class="btn btn-style btn-text" onclick="createGroup()" disabled>Create group</button>
+          </div>
+        </div>
+      </div>
+    
+      <div class="col-sm-7">
+        <div class="main-section">
+            <div id="groups-temp">
+    
             </div>
-        </div>
-        <button id="stop-rooms" class="btn btn-danger" onclick="removeRooms()" style="display: none;">Stop rooms</button>
+            <div id="groups-created">
+              <h1 id="head-groups" class="textDefault">ROOMS CREATED</h1>
+                <div id="groups-container">
+                </div>
+            </div>
+            <button id="stop-rooms" class="btn btn-danger" onclick="removeRooms()" style="display: none;">Stop rooms</button>
+          </div>
       </div>
-  </div>
-
-  <div class="col-sm-2">
-    <div id="rooms-updates" style="display: inline-block;">
-      <h1 class="textDefault">Notifications</h1>
-    </div>
-    <div class="start-container">
-      <button type="button" class="btn btn-info btn-lg textDefault" id="set-timer-btn" data-toggle="modal" data-target="#myModal" disabled>Set timer</button>
-    </div>
-  </div>
+    
+      <div class="col-sm-2">
+        <div id="rooms-updates">
+          <h1 class="textDefault">Notifications</h1>
+        </div>
+        <div class="start-container">
+          <button type="button" class="btn btn-lg btn-text btn-style" id="set-timer-btn" data-toggle="modal" data-target="#myModal" disabled>Set timer</button>
+        </div>
+      </div>
 
 </div>
 <script type="text/javascript">

@@ -15,10 +15,25 @@ nav{
   padding-top: 110px;
 }
 #dashboard-body{
+  font-family: Arial, Helvetica, sans-serif;
   background: #0b0c22;
   padding-top: 100px;
   overflow-x: hidden;
 }
+
+@media screen and (max-width: 600px) {
+  #dashboard-body {padding-top: 140px; }
+}
+
+.btn-text{
+  color: white;
+}
+
+.btn-style{
+  background-color: #00aa55;
+  text-align: center;
+}
+
 #list{
   background-color: #0b0c22;
   width: 100%;
@@ -123,14 +138,13 @@ color: #fff;
 }
 
 .notification-badge{
-  background-color: #ccc;
   width: 95%;
   margin:auto;
   display: inline-flex;
   padding: 5px;
   margin-top: 10px;
   text-align: center;
-  color: #555;
+  color: #fff;
 }
 
 .icons-notification{
@@ -145,12 +159,28 @@ color: #fff;
 }
 
 .accept-notification{
-  color:green;
+  color: #2b9e21;
 }
 .refuse-notification{
-  color:red;
+  color: #00898b;}
+
+.glow {
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
 }
 
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00cad8, 0 0 40px #00cad8, 0 0 50px #00cad8, 0 0 60px #00cad8, 0 0 70px #00cad8;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #4dff97, 0 0 40px #4dff97, 0 0 50px #4dff97, 0 0 60px #4dff97, 0 0 70px #4dff97, 0 0 80px #4dff97;
+  }
+}
 
 @media only screen and (max-width: 600px) {
   #login {
@@ -172,7 +202,6 @@ input[id="password"] {
   margin-bottom: 30px;
   background-color: #fff;
   padding-left: 30px;
- margin-left: 40px;
 }
 
 #btn-login {
@@ -203,7 +232,7 @@ Stylesheet of Professor Dashboard
 }
 
 .navbar-default {
-  background-color: rgb(119, 160, 185);
+  background-color: rgb(76, 132, 167);
 }
 .navbar-default .navbar-brand {
   color: white;
@@ -215,6 +244,7 @@ Stylesheet of Professor Dashboard
 }
 
 .textDefault {
+  font-size: xx-large;
   color: white;
   text-align: center;
 }
@@ -250,9 +280,7 @@ p.list-group {
 }
 
 #set-timer-btn{
-  background-color: #62b85a;
   position: absolute;
-  text-align: center;
   width: 100%;
   top: 50%;
 }
@@ -265,14 +293,6 @@ p.list-group {
   padding-right: 1cm;
   height: 2cm;
 }
-
-#start-btn{
-  left: 200px;
-  text-align: center;
-  background-color:#79ff6c ;
-  color: black;
-}
-
 
 .modal-title{
   text-align: center;
@@ -513,7 +533,7 @@ Users-manually
 @media only screen /* ipad modus */
 and (max-device-width : 768px) {
   .open-chat-mobile{
-    display: inline-block;
+    display: block;
     float: right;
     margin-bottom: 15px;
   }
@@ -618,10 +638,13 @@ and (max-device-width : 768px) {
   color: #464646;
 }
 
+<<<<<<< HEAD
 #videos-remote-container{
   max-height: 500px;
 }
 
+=======
+>>>>>>> 92e5b11fbfdea0b02e75f388de3d4802c47d8cd5
 .name-in-video{
   position: absolute;
   padding: 10px 20px;
@@ -713,6 +736,7 @@ and (max-device-width : 704px) {
   position: absolute; 
   right: 0;
   text-align: center;
+  z-index: -1;
 }
 .text-box{
   text-align: center;
@@ -794,7 +818,6 @@ and (max-height : 825px) {
     padding-left: 0px;
   }
   }
-  
 
 @media only screen and (min-device-width : 320px)  /*iphone 5 */
 and (max-device-width : 374px) {
@@ -804,6 +827,7 @@ and (max-device-width : 374px) {
   position: absolute; 
   right: 0;
   text-align: center;
+  z-index: -1;
 }
 .text-box{
   text-align: center;
@@ -836,14 +860,13 @@ width: 100%;
   vertical-align: middle;
   line-height: 120px;
 }
-
 #timer{
   padding-left: 0px;
 }
 }
 
 @media only screen /* ipad modus */
-and (min-device-width : 768px) 
+and (min-device-width : 704px) 
 and (max-device-width : 790px) {
   #video-me{
     height: 105px;
@@ -932,4 +955,22 @@ and (max-device-width : 1030px) {
   #timer{
     padding-left: 0px;
   }
+}
+
+/*Features*/
+
+#features-container{ 
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.btn-features{
+  border-radius: 50%;
+  background-color: darkslategrey;
+  margin: 5px;
+}
+
+.icon{
+  color: #00aa55;
 }
