@@ -72,7 +72,8 @@
 
 </div>
 <script type="text/javascript">
-/*
+  $("#back-prof").css("display", "flex");
+  document.getElementById("back-prof").addEventListener('click', goBack);
   var uidProf = null;
   var studentsInfo = {};
   var students = null;
@@ -99,10 +100,6 @@
                     setRoomsCreated(alreadyInDb)
                     console.log(alreadyInDb)
                   } else {
-                    realTimeDb.ref(uidProf).set({
-                      mode: "manually",
-                      joining: false
-                    })
                     getStudents();
                   }
                 });
@@ -119,6 +116,10 @@
           window.location.replace(url + "/index.html");
       }
   });
+  function goBack() {
+      let url = window.location.origin;
+      window.location.replace(url + "/professor.html");
+    }
   function setRoomsCreated(inRTDB) {
     endTimeGlobal = new Date(inRTDB.endtime);
     let students = inRTDB.students;
@@ -136,7 +137,6 @@
         }
       }
     }
-    console.log(roomsCreated)
     createGroupFromDB();
     countdownInit();
   }
@@ -155,13 +155,10 @@
       roomsCreated[idRoom].forEach(student => {
         node += '<span>' + student.name + '</span><br>';
       })
-      // node+='</div></div>';
       node += '</div><a class="join-group" href="#" onclick="joinGroup(\'' + idRoom + '\')">Join</a></div>';
       $("#groups-container").append(node);
     }
     nRooms = Object.keys(roomsCreated).length;
-    // roomsCreated[idRoom].groupName = "Group " + nRooms;
-    // $("#group" + idRoom + ">p").html("Group " + nRooms);
     if (nRooms > 1) {
       head = 'YOU HAVE CREATED ' + nRooms + ' ROOMS';
     } else {
@@ -169,11 +166,8 @@
     }
     $("#head-groups").html(head);
     groups = [];
-    console.log(roomsCreated)
     $("#students-list-container").css("display", "none");
     $(".start-container").css("display", "none");
-    //add also notifications
-    //start timer
     $("#rooms-updates").css("display", "inline-block");
     enableCreateGroup();
     realTimeReadRooms();
@@ -202,6 +196,7 @@
         position ++;
       })
     });
+    setModeMatching()
     realTimeReadStudents();
   }
   function addToArrGroups(id) {
@@ -270,7 +265,6 @@
     }
     $("#head-groups").html(head);
     groups = [];
-    console.log(roomsCreated)
     enableCreateGroup()
     enableTimer();
     disableCheckboxes();
@@ -347,8 +341,8 @@
   function realTimeReadStudents(){
     var studentRealTime = realTimeDb.ref(uidProf + '/students/');
     studentRealTime.on('value', function (snapshot) {
-      console.log(snapshot)
-      console.log(snapshot.val())
+      // console.log(snapshot)
+      // console.log(snapshot.val())
     });
   }
 
@@ -358,20 +352,13 @@
       let data = snapshot.val();
       for(key in data){
         let room = data[key];
-        console.log(room)
         if(room.moreTime>0 && $("#not"+key+"time").length==0){
-          console.log(room.moreTime)
           addNotification("time", key, room.moreTime);
         }
         if(room.needsHelp == true && $("#not"+key+"help").length == 0){
-          console.log(room.needsHelp)
           addNotification("help", key, null);
         }
       }
-      console.log("-------------------")
-      console.log("Rooms RT: ")
-      console.log(data)
-      console.log("-------------------")
     });
   }
 
@@ -409,7 +396,7 @@
         realTimeDb.ref(uidProf + '/rooms/' + idRoom).update({
           needsHelp: false
         });
-      console.log("connect to room")
+        joinGroup(idRoom)
     } else if(accept == false && type == "time"){
       realTimeDb.ref(uidProf + '/rooms/' + idRoom).update({
         moreTime: 0
@@ -424,6 +411,7 @@
   }
 
   function countdownInit(){
+    $("#back-prof").css("display", "none");
     fetch('https://worldtimeapi.org/api/timezone/Europe/Rome')
       .then(function (response) {
         return response.text();
@@ -459,10 +447,6 @@
     let head = 'ROOMS CREATED';
     $("#head-groups").html(head);
     for (let key in roomsCreated) {
-      //   roomsCreated[key].forEach(student => {
-      //     studentsInfo[student.id].room = null;
-      //     $("#" + student.id).parent().css("display", "inline-block")
-      //  });
       $("#group" + key).remove();
     }
     $("#students-list").html("");
@@ -486,8 +470,15 @@
     countdown = null;
     groups = [];
     $('#rooms-updates').html('<h1 class="textDefault">Notifications</h1>');
+    $("#back-prof").css("display", "flex");
     enableTimer();
     getStudents();
   }
-  */
+  function setModeMatching(){
+    realTimeDb.ref(uidProf).set({
+      mode: "manually",
+      joining: false
+    })
+  }
+  
 </script>

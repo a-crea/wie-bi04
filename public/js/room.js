@@ -1,4 +1,4 @@
-/*
+
 $(function () {
     var db = firebase.firestore();
     var realTimeDb = firebase.database();
@@ -29,11 +29,11 @@ $(function () {
                             idRoom = alreadyInDb.joining
                             isProf = true
                             endTimeGlobal = alreadyInDb.endtime;
-                            $("#more-time-select").attr("disabled", true);
-                            $("#request-time-btn").attr("disabled", true);
+                            $("#back-prof").css("display", "flex");
                             $("#room-waiting").css("display", "none");
                             $(".room-active").css("display", "initial");
                             $(".row.room-active").css("display", "flex");
+                            $("#request-time-container").css("display", "none");
                             connectToRoom()
                             countdownInit()
                         } else {
@@ -53,8 +53,14 @@ $(function () {
 
             document.getElementById("btn-send").addEventListener("click", sendMessage);
             document.getElementById("request-time-btn").addEventListener("click", requireMoreTime);
+            document.getElementById("back-prof").addEventListener("click", goBack);
             document.getElementById("open-chat").addEventListener("click", toggleChat);
             document.getElementById("close-chat").addEventListener("click", toggleChat);
+
+            function goBack(){
+                let url = window.location.origin;
+                window.location.replace(url + "/professor.html");
+            }
 
             function connectToRTDBStud() {
                 var studentRealTime = realTimeDb.ref(prof + '/students/' + uid);
@@ -178,13 +184,16 @@ $(function () {
 
             function sendMessage() {
                 let msg = $("input").val();
+                if ($("#chat-disclaimer").length > 0) {
+                    $("#chat-disclaimer").remove();
+                }
                 $("input").val("");
                 $(".chat-container").append('<div class="message-container me"><div class="chat-message-me"><span>' + name + '</span>' + msg + '</div></div>');
                 scrollChat();
                 connection.send(msg);
             }
             function isWaiting() {
-                if (Object.keys(peersInfo).length == 0 || $('#videos-remote-container > *').length == 1) {
+                if ($('#videos-remote-container > *').length == 1 || Object.keys(peersInfo).length == 0) {
                     $("#video-placeholder").css("display", "flex");
                 }
             }
@@ -200,11 +209,6 @@ $(function () {
                             if (error) {
                                 connectToRoom()
                             }
-                            if (connection.isInitiator === true) {
-                                // you opened the room
-                            } else {
-                                // you joined it
-                            }
                         });
                     }
                     else {
@@ -215,20 +219,61 @@ $(function () {
             var connection = new RTCMultiConnection();
 
             // by default, socket.io server is assumed to be deployed on your own URL
-            connection.socketURL = '/';
+            // connection.socketURL = '/';
 
             // comment-out below line if you do not have your own socket.io server
             connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
+            // connection.socketURL = 'https://webrtcweb.com:9002/';
 
-            connection.socketMessageEvent = 'audio-video-file-chat-demo';
+            // connection.socketMessageEvent = 'audio-video-file-chat-demo';
 
-            connection.enableFileSharing = true; // by default, it is "false".
+            // connection.enableFileSharing = true; // by default, it is "false".
+
+            connection.mediaConstraints = {
+                video: true,
+                audio: {
+                    mandatory: {
+                        echoCancellation: true, // disabling audio processing
+                        googAutoGainControl: true,
+                        googNoiseSuppression: true,
+                        googHighpassFilter: true,
+                        googTypingNoiseDetection: true,
+                        //googAudioMirroring: true
+                    },
+                    optional: []
+                }
+            };
+
+            if (DetectRTC.browser.name === 'Firefox') {
+                connection.mediaConstraints = {
+                    audio: true,
+                    video: true
+                };
+            }
 
             connection.session = {
                 audio: true,
                 video: true,
-                data: true
+                data: false
             };
+
+            connection.candidates = {
+                turn: true,
+                stun: true,
+                host: true
+            };
+
+            connection.onNewParticipant = function (participantId, userPreferences) {
+
+                userPreferences.dontAttachStream = false; // according to situation
+                userPreferences.dontGetRemoteStream = false;  // according to situation
+
+                // below line must be included. Above all lines are optional.
+                // if below line is NOT included; "join-request" will be considered rejected.
+                connection.acceptParticipationRequest(participantId, userPreferences);
+            };
+
+            connection.maxParticipantsAllowed = 4;
 
             connection.sdpConstraints.mandatory = {
                 OfferToReceiveAudio: true,
@@ -242,27 +287,28 @@ $(function () {
                     'stun:stun.l.google.com:19302',
                     'stun:stun1.l.google.com:19302',
                     'stun:stun2.l.google.com:19302',
+                    'stun:stun3.l.google.com:19302',
+                    'stun:stun4.l.google.com:19302',
+                    'stun:stun.stunprotocol.org:3478',
                     'stun:stun.l.google.com:19302?transport=udp',
+                    'stun:stun1.l.google.com:19302?transport=udp',
+                    'stun:stun2.l.google.com:19302?transport=udp',
+                    'stun:stun3.l.google.com:19302?transport=udp',
+                    'stun:stun4.l.google.com:19302?transport=udp',
                 ]
+                // 'urls': [
+                //     'stun:stun.l.google.com:19302',
+                //     'stun:stun1.l.google.com:19302',
+                //     'stun:stun2.l.google.com:19302',
+                //     'stun:stun.l.google.com:19302?transport=udp',
+                // ]
             }];
-        
+
             connection.onmessage = function (event) {
                 let remoteUserId = event.userid;
                 let msg = event.data;
-                console.log(event.data)
-                console.log(event.userid)
-                if (msg.hasOwnProperty('isProf')) {
-                    let remoteName = event.data.name;
-                    let isProf = event.data.isProf;
-                    console.log(event.data)
-                    peersInfo[remoteUserId] = {
-                        name: remoteName,
-                        isProf: isProf
-                    }
-                } else {
-                    $(".chat-container").append('<div class="message-container"><div class="chat-message"><span>' + peersInfo[remoteUserId].name + '</span>' + msg + '</div></div>')
-                    scrollChat()
-                }
+                $(".chat-container").append('<div class="message-container"><div class="chat-message"><span>' + peersInfo[remoteUserId].name + '</span>' + msg + '</div></div>')
+                scrollChat()
             };
             connection.onleave = function (event) {
                 let remoteUserId = event.userid;
@@ -270,7 +316,6 @@ $(function () {
                 delete peersInfo[remoteUserId];
                 checkProfDiv()
                 isWaiting();
-                //check how many divs in container, if 0 show video placeholder
             };
             connection.onclose = function (event) {
                 let remoteUserId = event.userid;
@@ -288,6 +333,7 @@ $(function () {
                     name: remoteName,
                     isProf: remoteRole
                 }
+                // console.log(event)
                 let classVideo, classVideoContainer;
                 let video = document.createElement('video');
                 let div = document.createElement('div');
@@ -301,13 +347,13 @@ $(function () {
                     classVideo = 'video-local';
                     classVideoContainer = 'video-local-container';
                 } else {
-                    $("#video-placeholder").css("display", "none");
                     if (peersInfo[remoteUserId].isProf == true) {
                         connection.videosContainer = document.getElementById('video-professor-ale');
                         classVideo = 'video-local';
                         classVideoContainer = 'video-local-container';
                         span.classList.add('name-in-video-prof');
                     } else {
+                        $("#video-placeholder").css("display", "none");
                         connection.videosContainer = document.getElementById('videos-remote-container');
                         classVideo = 'video-remote';
                         classVideoContainer = 'video-remote-container';
@@ -318,16 +364,21 @@ $(function () {
                     div.append(span);
                 }
                 video.controls = true;
+                video.autoplay = true;
+                video.setAttribute('playsinline', 'playsinline');
+                video.allowsInlineMediaPlayback = true;
                 video.classList.add(classVideo);
                 div.setAttribute('id', remoteUserId);
                 div.classList.add(classVideoContainer);
                 video.srcObject = event.stream;
                 div.append(video);
-                connection.videosContainer.append(div);
-                checkProfDiv()
-                setTimeout(function () {
-                    video.play();
-                }, 5000);
+                if ($("#" + remoteUserId).length==0){
+                    connection.videosContainer.append(div);
+                    checkProfDiv()
+                    // setTimeout(function () {
+                    //     video.play();
+                    // }, 5000);
+                }
             }
 
             function checkProfDiv(){
@@ -345,4 +396,3 @@ $(function () {
         }
     });
 });
-*/

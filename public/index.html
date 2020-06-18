@@ -13,15 +13,62 @@
 </head>
 
 <body id="index-body">
+    <div class="modal fade" id="login-error" tabindex="-1" role="dialog" aria-labelledby="LoginError"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="LoginError">Login Error</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            An error occured, please check your email and password.
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
     <div id="login"class="container">
       <img id="login-img" src="img/login-icon.png">
-        <div class="form-input">
-          <input class="form-control" id="email" type="text" placeholder="Enter your unibz email">
+        <div id="login-spinner">
+          <div class="spinner-grow text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-danger" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-warning" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-info" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-light" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
+          <div class="spinner-grow text-dark" role="status">
+            <span class="sr-only">Loading...</span>
+          </div>
         </div>
-        <div class="form-input">
-          <input class="form-control" id="password" type="password" placeholder="Password">
+        <div id="login-form">
+          <div class="form-input">
+            <input class="form-control" id="email" type="text" placeholder="Enter your unibz email" required>
+          </div>
+          <div class="form-input">
+            <input class="form-control" id="password" type="password" placeholder="Password" required>
+          </div>
+          <button id="btn-login" class="btn btn-success" onclick="login()" disabled>LOGIN</button>
         </div>
-        <button id="btn-login" class="btn btn-success" onclick="login()">LOGIN</button>
     </div>
   <script src="/__/firebase/7.14.2/firebase-app.js"></script>
   <script src="/__/firebase/7.14.2/firebase-auth.js"></script>

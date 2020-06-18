@@ -80,7 +80,14 @@ margin-left: 0px;
 border: none;
 color: #fff;
 }
-
+#login-spinner{
+  display: none;
+  height: 85%;
+  padding: 0px 40px;
+}
+#login-spinner div{
+  margin:auto;
+}
 .custom-checkbox{
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -483,6 +490,10 @@ Users-manually
   position: relative;
   display: initial;
 }
+#chat-disclaimer{
+    font-style: italic;
+    color: #77a0b9;
+}
 .open-chat-mobile{
   display: none;
 }
@@ -531,6 +542,7 @@ and (max-device-width : 768px) {
 }
 .chat-container{
   height: 90%;
+  min-height: 40vw;
   max-height: 700px;
   overflow:auto;
   background-color: #0b0c22;
@@ -607,6 +619,7 @@ and (max-device-width : 768px) {
 }
 
 #videos-remote-container{
+  max-height: 500px;
 }
 
 .name-in-video{
