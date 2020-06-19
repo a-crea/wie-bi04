@@ -57,7 +57,9 @@ $(function () {
             document.getElementById("open-chat").addEventListener("click", toggleChat);
             document.getElementById("close-chat").addEventListener("click", toggleChat);
             $(".fa-video").parent().on("click", toggleLocalVideo);
+            $(".fa-video-slash").parent().on("click", toggleLocalVideo);
             $(".fa-microphone").parent().on("click", toggleLocalMic);
+            $(".fa-microphone-slash").parent().on("click", toggleLocalMic);
             $(".fa-question-circle").parent().on("click", askForHelp);
 
             function goBack(){
@@ -100,7 +102,16 @@ $(function () {
                 });
                 var helpRT = realTimeDb.ref(prof + '/rooms/' + idRoom + '/needsHelp');
                 helpRT.on('value', function (snapshot) {
-                    console.log("help, disable button if true")
+                    if (snapshot.val() == true){
+                        $(".fa-question-circle").parent().css("background-color", "#636592");
+                        $(".fa-question-circle").css("color", "#d4dbd8");
+                        $(".fa-question-circle").parent().css('cursor', 'default');
+                    } else {
+                        $(".fa-question-circle").parent().css('cursor', 'pointer');
+                        $(".fa-question-circle").parent().removeAttr("style");
+                        $(".fa-question-circle").removeAttr("style");
+                    }
+
                 });
             }
 
@@ -280,7 +291,8 @@ $(function () {
 
             connection.sdpConstraints.mandatory = {
                 OfferToReceiveAudio: true,
-                OfferToReceiveVideo: true
+                OfferToReceiveVideo: true,
+                IceRestart: true
             };
 
             // https://www.rtcmulticonnection.org/docs/iceServers/
@@ -403,9 +415,13 @@ $(function () {
                 let localStream = connection.attachStreams[0];
                 if(connection.extra.mutedVideo == true){
                     connection.extra.mutedVideo = false;
+                    $(".fa-video").parent().css("display", "inline-block");
+                    $(".fa-video-slash").parent().css("display", "none");
                     localStream.unmute('video');
                 } else {
                     connection.extra.mutedVideo = true;
+                    $(".fa-video").parent().css("display", "none");
+                    $(".fa-video-slash").parent().css("display", "inline-block");
                     localStream.mute('video');
                 }
             }
@@ -414,10 +430,14 @@ $(function () {
                 let localStream = connection.attachStreams[0];
                 if (connection.extra.mutedAudio == true) {
                     connection.extra.mutedAudio = false;
+                    $(".fa-microphone").parent().css("display","inline-block");
+                    $(".fa-microphone-slash").parent().css("display","none");
                     localStream.unmute();
                 } else {
                     connection.extra.mutedAudio = true;
                     localStream.mute('audio');
+                    $(".fa-microphone").parent().css("display","none");
+                    $(".fa-microphone-slash").parent().css("display","inline-block");
                 }
             }
 

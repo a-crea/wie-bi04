@@ -562,6 +562,7 @@ and (max-device-width : 768px) {
     background:#0b0c22;
   }
   .chat-container{
+    height: 90% !important;
     border-top:1px solid #1f2149;
     border-top-left-radius: 0.5em;
     border-top-right-radius: 0.5em;
