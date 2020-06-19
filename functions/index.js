@@ -42,5 +42,6 @@ exports.signUpUser = functions.https.onCall((data, context) => {
 exports.userDeleted = functions.auth.user().onDelete(user => {
     db.collection("users").doc(user.uid).delete();
     db.collection("teaching").doc(user.uid).delete();
+    //delete professor in users->student
     return true;
 });
