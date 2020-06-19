@@ -1,10 +1,10 @@
     <div class="col-sm-12">
         <div class="main-section">
             <h1 class="textDefault">CREATE ROOMS</h1>
-            <button type="button" id="btn-manually" onclick="matchManually()" class="btn btn-lg">
+            <button type="button" id="btn-manually" onclick="matchManually()" class="btn btn-lg" disabled>
                 <h3 class="text-default">MATCH USERS MANUALLY</h3>
             </button>
-            <div><button type="button" id="btn-randomly" onclick="matchRandomly()" class="btn btn-lg">
+            <div><button type="button" id="btn-randomly" onclick="matchRandomly()" class="btn btn-lg" disabled>
                     <h3 class="text-default">MATCH USERS RANDOMLY</h3>
                 </button></div>
         </div>
@@ -26,6 +26,9 @@
                                 matchManually()
                             } else if (alreadyInDb && alreadyInDb.rooms && alreadyInDb.mode == "randomly"){
                                 matchRandomly()      
+                            } else {
+                                $('#btn-manually').attr("disabled", false);
+                                $('#btn-randomly').attr("disabled", false);
                             }
                         });
                         $("#professor-name").html(user.displayName);

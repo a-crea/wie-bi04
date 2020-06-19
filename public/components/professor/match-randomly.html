@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button onclick="initiateRooms()" type="button" id="start-btn" class="btn btn-success btn-block"
+          <button onclick="initiateRooms()" type="button" id="start-btn" class="btn btn-style btn-text btn-block"
             data-dismiss="modal">Start</button>
         </div>
       </div>
@@ -82,7 +82,8 @@
       <h1 class="textDefault">Notifications</h1>
     </div>
     <div class="start-container">
-      <button type="button" class="btn btn-info btn-lg textDefault" id="set-timer-btn" data-toggle="modal" data-target="#myModal" disabled>Set timer</button>
+          <button type="button" class="btn btn-lg btn-text btn-style" id="set-timer-btn" data-toggle="modal"
+            data-target="#myModal" disabled>Set timer</button>
     </div>
   </div>
 
@@ -229,6 +230,7 @@
     count=0;
     let nStud = Object.keys(students).length
     idRoom = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+    idRoom = "1"+idRoom;
     roomsCreated[idRoom] = [];
     shuffle(students);
     while(count<nStud){
@@ -262,6 +264,7 @@
         break
       }
       if(count%2==0 || (count == students.length - 1 && nStud % 2 == 1)){
+        node += '</div><a class="join-group" href="#" onclick="joinGroup(\'' + idRoom + '\')">Join</a></div>';
         $("#groups-container").append(node);
         $(".join-group").css("display", "none");
         nRooms = Object.keys(roomsCreated).length;
@@ -275,6 +278,7 @@
         $("#head-groups").html(head);
         if(count != students.length - 1){
           idRoom = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+          idRoom = (nRooms+1).toString() + idRoom;
           roomsCreated[idRoom] = [];
         }
       }

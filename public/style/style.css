@@ -501,7 +501,7 @@ Users-manually
 /* students-view */
 
 .video-controls{
-  position:absolute;
+  position:relative;
   margin-top: -50px;
   left:10px;
 }
@@ -567,15 +567,15 @@ and (max-device-width : 768px) {
     border-top-right-radius: 0.5em;
   }
   .video-remote-container{
-    margin:auto;
+    margin-bottom: 50px;
   }
   .video-remote{
     max-width:unset !important;
   }
 }
 .chat-container{
-  /* height: 70%;
-  min-height: 40vw; */
+  height: 70%;
+  /* min-height: 40vw;  */
   max-height: 500px;
   overflow:auto;
   background-color: #0b0c22;
@@ -652,7 +652,7 @@ and (max-device-width : 768px) {
 }
 
 #videos-remote-container{
-  max-height: 500px;
+  /* max-height: 500px; */
 }
 
 .name-in-video{
@@ -676,7 +676,7 @@ and (max-device-width : 768px) {
   width:100%;
 }
 .video-remote-container{
-  /* margin:auto; */
+  margin-bottom: 50px;
   float:left;
 }
 .video-remote{

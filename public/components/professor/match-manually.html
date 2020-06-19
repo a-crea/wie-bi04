@@ -103,7 +103,6 @@
                   alreadyInDb = snapshot.val()
                   if(alreadyInDb && alreadyInDb.rooms){
                     setRoomsCreated(alreadyInDb)
-                    console.log(alreadyInDb)
                   } else {
                     getStudents();
                   }
@@ -246,7 +245,9 @@
   }
   function createGroup() {
     let idRoom,node,head,update,temp,nRooms;
+    nRooms = Object.keys(roomsCreated).length;
     idRoom = Math.random().toString(36).substring(2, 10) + Math.random().toString(36).substring(2, 10);
+    idRoom = nRooms.toString() + idRoom
     node = '<div id="group'+idRoom+'" class="single-group"><p class="head-single-group"></p><div>';
     roomsCreated[idRoom] = [];
     groups.forEach(id => {

@@ -107,7 +107,6 @@ $(function () {
             function requireMoreTime() {
                 let timeRequested = $("#more-time-select").val();
                 timeRequested = parseInt(timeRequested, 10);
-                console.log(timeRequested)
                 realTimeDb.ref(prof + '/rooms/' + idRoom).update({
                     moreTime: timeRequested
                 })
@@ -402,7 +401,6 @@ $(function () {
 
             function toggleLocalVideo(){
                 let localStream = connection.attachStreams[0];
-                console.log()
                 if(connection.extra.mutedVideo == true){
                     connection.extra.mutedVideo = false;
                     localStream.unmute('video');
@@ -416,7 +414,7 @@ $(function () {
                 let localStream = connection.attachStreams[0];
                 if (connection.extra.mutedAudio == true) {
                     connection.extra.mutedAudio = false;
-                    localStream.unmute('audio');
+                    localStream.unmute();
                 } else {
                     connection.extra.mutedAudio = true;
                     localStream.mute('audio');
@@ -433,7 +431,6 @@ $(function () {
                 let id = event.target.getAttribute("data-video-ref");
                 let target = document.getElementById("video" + id)
                 let streamByUserId = connection.streamEvents.selectFirst({ userid: id }).stream;
-                console.log(connection.streamEvents.selectFirst({ userid: id }).extra)
                 if ($("#controls" + id + ">i.fa-volume-up").is(":visible")){
                     streamByUserId.unmute("audio");
                 }
@@ -469,9 +466,9 @@ $(function () {
 
             function checkProfDiv(){
                 if ($('#video-professor-ale > *').length>0) {
-                    $('#video-professor-ale').parent().css('display', 'flex');
+                    $('#video-professor-ale').css('display', 'flex');
                 } else {
-                    $('#video-professor-ale').parent().css('display', 'none');
+                    $('#video-professor-ale').css('display', 'none');
                 }
             }
 
