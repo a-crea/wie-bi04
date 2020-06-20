@@ -7,9 +7,25 @@
   <meta name="description" content="wie-bi04-project">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" a href="style/style.css">
   <title>Add user</title>
 </head>
-<body>
+<body id="dashboard-body">
+  <nav class="navbar fixed-top navbar-default">
+    <a class="navbar-brand" href="#">Dashboard</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="nav navbar-nav navbar-right">
+      <li>Welcome, <span id="professor-name"></span></li>
+      <li><a href="teaching.html">Teaching</a> |
+        <a href="signup.html">Sign Up</a></li>
+      <li><a onclick="signOut()" href="#">Logout</a></li>
+    </ul>
+    <div id="back-prof">
+      <a href="professor.html" class="btn btn-danger">GO BACK</a>
+    </div>
+  </nav>
   <div class="modal fade" id="modal-message" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -29,7 +45,7 @@
     </div>
   </div>
   <div class="container text-center">
-    <h1>Add user</h1>
+    <h1 class="textDefault">Add user</h1>
     <div class="col-12 text-center">
       <form id="signup-form" class="needs-validation" novalidate>
         <div class="form-row">
@@ -45,13 +61,13 @@
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group text-center m-auto pt-4">
+          <div class="form-group text-center m-auto pt-2">
             <label for="password">Password</label>
             <input id="password" name="password" type="password" class="form-control" required>
           </div>
         </div>
         <div class="form-row">
-          <div class="form-group text-center m-auto pt-4">
+          <div class="form-group text-center m-auto pt-2">
             <div class="custom-control custom-radio custom-control-inline">
               <input type="radio" id="student" name="role" class="custom-control-input" value="student" checked required>
               <label class="custom-control-label" for="student">Student</label>
@@ -90,80 +106,9 @@
     integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
     integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="./js/signup.js"></script>
   <script type="text/javascript">
-  (function () {
-      'use strict';
-      window.addEventListener('load', function () {
-        var forms = document.getElementsByClassName('needs-validation');
-        var validation = Array.prototype.filter.call(forms, function (form) {
-          form.addEventListener('submit', function (event) {
-            if (form.checkValidity() === true) {
-              addUser();
-            }
-            event.preventDefault();
-            form.classList.add('was-validated');
-          }, false);
-        });
-      }, false);
-    })();
-    var db = firebase.firestore();
-    firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {
-          console.log(user);
-          var docRef = db.collection("teaching").doc(user.uid);
-          docRef.get().then(function (doc) {
-            if (!doc.exists) {
-              let url = window.location.origin;
-              window.location.replace(url + "/index.html");
-            }
-          })
-        } else {
-          console.log("user not logged in");
-          let url = window.location.origin;
-          window.location.replace(url + "/index.html");
-        }
-      });
-    function addUser(){
-      let name = $("input[name=name]").val();
-      let email = $("input[name=email]").val();
-      let psw = $("input[name=password]").val();
-      let role = $("input[name=role]:checked").val();
-      if(name != null && email != null && psw != null && role != null){
-        $("#save-button").hide();
-        $("#saving-button").show();
-        let signUp = firebase.functions().httpsCallable('signUpUser');
-        let send = {
-          name: name,
-          email: email,
-          psw: psw,
-          role: role
-        }
-        signUp(send).then((result) => {
-          $("#save-button").show();
-          $("#saving-button").hide();
-          if(result.data.state == true){
-            launchModal("Success", "User correctly registered!");
-            resetInputs();
-          } else {
-            launchModal("Warning", "Something went wrong, please try again.");
-          }
-        })
-      }
-      else{
-        launchModal("Warning", "Please, check the values inserted.");
-      }
-    }
-    function launchModal(label,body){
-      $('#modal-label').html(label);
-      $('#modal-body').html(body);
-      $('#modal-message').modal('toggle');
-    } 
-    function resetInputs(){
-      $("#signup-form").removeClass("was-validated");
-      $("input[name=name]").val("");
-      $("input[name=email]").val("");
-      $("input[name=password]").val("");
-    }
+  
 
   </script>
 </body>

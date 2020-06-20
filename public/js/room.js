@@ -292,31 +292,30 @@ $(function () {
             connection.sdpConstraints.mandatory = {
                 OfferToReceiveAudio: true,
                 OfferToReceiveVideo: true,
-                IceRestart: true
             };
 
             // https://www.rtcmulticonnection.org/docs/iceServers/
             // use your own TURN-server here!
             connection.iceServers = [{
-                'urls': [
-                    'stun:stun.l.google.com:19302',
-                    'stun:stun1.l.google.com:19302',
-                    'stun:stun2.l.google.com:19302',
-                    'stun:stun3.l.google.com:19302',
-                    'stun:stun4.l.google.com:19302',
-                    'stun:stun.stunprotocol.org:3478',
-                    'stun:stun.l.google.com:19302?transport=udp',
-                    'stun:stun1.l.google.com:19302?transport=udp',
-                    'stun:stun2.l.google.com:19302?transport=udp',
-                    'stun:stun3.l.google.com:19302?transport=udp',
-                    'stun:stun4.l.google.com:19302?transport=udp',
-                ]
                 // 'urls': [
                 //     'stun:stun.l.google.com:19302',
                 //     'stun:stun1.l.google.com:19302',
                 //     'stun:stun2.l.google.com:19302',
+                //     'stun:stun3.l.google.com:19302',
+                //     'stun:stun4.l.google.com:19302',
                 //     'stun:stun.l.google.com:19302?transport=udp',
+                //     'stun:stun1.l.google.com:19302?transport=udp',
+                //     'stun:stun2.l.google.com:19302?transport=udp',
+                //     'stun:stun3.l.google.com:19302?transport=udp',
+                //     'stun:stun4.l.google.com:19302?transport=udp',
+                //     'stun:stun.stunprotocol.org:3478',
                 // ]
+                'urls': [
+                    'stun:stun.l.google.com:19302',
+                    'stun:stun1.l.google.com:19302',
+                    'stun:stun2.l.google.com:19302',
+                    'stun:stun.l.google.com:19302?transport=udp',
+                ]
             }];
 
             connection.onmessage = function (event) {

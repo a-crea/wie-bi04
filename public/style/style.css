@@ -21,6 +21,10 @@ nav{
   overflow-x: hidden;
 }
 
+label{
+  color:white;
+}
+
 @media screen and (max-width: 600px) {
   #dashboard-body {padding-top: 170px; }
 }
@@ -32,6 +36,13 @@ nav{
 .btn-style{
   background-color: #00aa55;
   text-align: center;
+}
+
+#students-list-assigned{
+  color:white;
+}
+#students-list-assigned>p>button{
+  margin:5px;
 }
 
 #list{
@@ -77,13 +88,13 @@ nav{
 
 input[id="email"],
 input[id="password"] {
-  margin-top: 30px;
+  /* margin-top: 30px; */
   margin-left: auto;
   margin-right: auto;
   height: 45px;
   width: 300px;
   font-size: 18px;
-  margin-bottom: 30px;
+  margin-bottom: 22px;
   background-color: #fff;
   padding-left: 30px;
 }
@@ -196,7 +207,7 @@ color: #fff;
 
 input[id="email"],
 input[id="password"] {
-  margin-top: 30px;
+  /* margin-top: 30px; */
   height: 40px;
   width: 200px;
   font-size: 12px;
