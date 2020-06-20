@@ -79,6 +79,7 @@ label{
 }
 
 #login-img{
+  margin-bottom: 25px;
   max-width: 150px;
   max-height: 150px;
   position: relative;
