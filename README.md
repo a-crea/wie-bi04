@@ -40,6 +40,7 @@ When connected as a professor, click on *Sign Up* link in the navbar.
 
 ### Disclaimer and problems known
 **A WEBCAM IS REQUIRED TO ACCESS THE SERVICE**
+
 **USE A PAIR OF HEADPHONES TO HAVE A GOOD EXPERIENCE**
 
 
