@@ -7,7 +7,7 @@ Web and Internet Engineering project 2019/2020
 Please connect to https://wie-bi04.firebaseapp.com/
 Login as professor email: *acrea@unibz.it* psw: *test1234*
 Select how to create groups.
-Please refer to the video https://scientificnet-my.sharepoint.com/:v:/g/personal/vbelingheri_unibz_it/ERsBZONjuCxMr-skHC5nKDABB9jyg0yeq4fQJd7Z6xFwYw?e=df0t6F for more information.
+Please refer to the video https://scientificnet-my.sharepoint.com/:v:/g/personal/vbelingheri_unibz_it/ERsBZONjuCxMr-skHC5nKDABKpLFg--_0jpDwkgx8aD9VQ?e=baokqI for more information.
 Once groups are created, click on "SET TIMER" and select an amount of minutes.
 Click on "START": rooms created.
 
